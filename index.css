@@ -1,0 +1,443 @@
+@font-face {
+    font-family: 'BubbleboddyNeue';
+    src: url('res/BubbleboddyNeue.ttf');
+}
+
+@font-face {
+    font-family: 'Alata-Regular';
+    src: url('res/Alata-Regular.ttf');
+}
+
+body{
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    position: relative;
+    min-height: 100vh;
+
+    background-image: url(res/Background/Gradient1.png);
+    background-attachment: scroll;
+    background-repeat: repeat;
+    background-size: cover;
+
+    font-family: 'Alata';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+body:hover{
+    cursor: default;
+}
+
+.content-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    width: 100%;
+    padding-bottom:0; /* Untuk kasi Jarak Footer */
+
+
+    background-image: url(res/Background/Gradient1.png);
+    background-attachment: scroll;
+    background-repeat: repeat;
+    background-size: cover;
+}
+
+.footer{
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: fit-content; 
+    background-color: #000062;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: Alata-Regular;
+    font-size: 20px;
+    margin-top: 15%;
+}
+
+.footerDesc{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.footerContacts{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 45%;
+    gap: 10%;
+}
+
+.footerTitle{
+    display: flex;
+    justify-content: baseline;
+    align-items: center;
+    width: 45%;
+    font-family: BubbleboddyNeue;
+    font-size: 60px;
+}
+
+.footerCopyright{
+    text-align: center;
+    letter-spacing: 1px;
+    margin-bottom: 1%;
+}
+
+.footer{
+    transition: all 0.3s ease;
+}
+
+.footerButton:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    transform: scale(1.2);
+}
+
+
+
+
+
+.MenuBar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 1%;
+}
+
+.Right{
+    display: inline-flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    align-items: center;
+    z-index: 1;
+    width: fit-content;
+    margin-right: 3%;
+}
+
+.Button{
+    font-family: 'Alata-regular';
+    font-weight: 400;
+    font-size: 25px;
+    color: white;
+    padding: 10px 20px;
+    margin: 0 10px;
+    /* padding-top: 20px;
+    padding-bottom: 20px; */
+    transition: all 0.3s ease;
+    /* text-shadow:  5px 5px 0 rgba(0, 0, 0, 0.486); */
+}
+
+.Button:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.Filled{
+    border: white solid 2px;
+    color: rgb(255, 255, 255);
+    border-radius: 200px;
+    margin-left: 5%;
+}
+
+.Filled:hover{
+    cursor: default;
+}
+
+.Title{
+    width: fit-content;
+    display: inline-block;
+    color: white;
+    font-family: BubbleboddyNeue;
+    font-size: 65px;
+    z-index: 1;
+    margin-left: 2%;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.64);
+}
+
+.Description{
+    font-size: 40px;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    font-family: 'Alata-Regular';
+    z-index: 1;
+    margin-top: -70px;
+    margin-bottom: 10px;
+    padding: 0;
+}
+
+.Description div {
+    font-size: 40px;
+    display: inline-block;
+    width: 60%;
+    text-align: center;
+}
+
+.Gotobrand{
+    border-radius: 200px;
+    border-style: none;
+    background-color: #000062;
+    width: fit-content;
+    text-shadow: none;
+    font-weight: 900;
+    margin-top: 0;
+    padding: 10px 20px;
+}
+
+.whitebox{
+    background-color: white;
+    z-index: 2;
+    width: 70%;
+    height: 12%;
+    margin: 5%;
+    margin-bottom: 10%;
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.36);
+}
+
+.features-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 5%;
+    width: 70%;
+    height: 680px;
+    margin-top: 3%;
+    margin-bottom: 25%;
+}
+
+.features{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(#816CF7, #E07DFC);
+    padding: 15%;
+    border-radius: 40px;
+    transition: all 0.3s ease;
+}
+
+.features:hover{
+    transform: scale(1.1);
+    cursor: default;
+}
+
+.IconDesc{
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-family: Alata-Regular;
+}
+
+.Icon{
+    margin-bottom: 5%;
+    width: 40%;
+}
+
+.IconTitle{
+    text-align: center;
+    color: white;
+    font-family: Alata-Regular;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.Preview{
+    height: 500px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5%;
+    margin-bottom: 5%;
+}
+
+.Preview:hover{
+    cursor: default;
+}
+
+.PreviewImg{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.PreviewImgLeft{
+    display: flex;
+    justify-content: baseline;
+    align-items: center;
+}
+
+.PreviewImg-container{
+    background-color: white;
+    background-size: cover;
+    background-position: 50%;
+    width: 75%;
+    height: 75%;
+    border-radius: 30px;
+    box-shadow: inset 0 0 50px black;
+}
+
+.PreviewImg-container.Dashboard{
+    background-image: url(res/Images/Dashboard.png);
+}
+
+.PreviewImg-container.Notes{
+    background-image: url(res/Images/Notes.png);
+}
+
+.PreviewDesc{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: Alata-Regular;
+    font-size: 30px;
+    color: white;
+}
+
+.PreviewDescLeft{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    text-align: end;
+    font-family: Alata-Regular;
+    font-size: 30px;
+    color: white;
+}
+
+.PreviewTitle{
+    margin: 0%;
+    font-size: 100px;
+}
+
+.PreviewParagraph{
+    width: 40%;
+    font-size: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.slideshow-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.slides {
+    display: flex;
+    width: 100%;
+    animation: slide-animation 10s infinite;
+}
+
+.slide {
+    width: 100%;
+    flex: 1 0 100%;
+}
+
+.slide img {
+    width: 100%;
+    display: block;
+    background-size: cover;
+}
+
+@keyframes slide-animation {
+    0% { transform: translateX(0); }
+    33% { transform: translateX(0); }
+    36% { transform: translateX(-100%); }
+    66% { transform: translateX(-100%); }
+    69% { transform: translateX(-200%); }
+    99% { transform: translateX(-200%); }
+    100% { transform: translateX(0); }
+}
+
+/* Desc words */
+
+.wordCarousel {
+    font-size: 70px;
+    font-weight: 100;
+    color: #eee;
+    display: flex; /* Use flexbox to control the layout */
+    align-items: center; /* Align items vertically in the center */
+    span {
+        font-size: 70px; /* Ensure the font size matches */
+        margin-right: 10px; /* Reduce margin to bring it closer */
+        display: inline-block; /* Ensure span is inline-block */
+    }
+    div {
+        overflow: hidden;
+        position: relative;
+        display: inline-block; /* Ensure div is inline-block */
+        height: 90px; /* Adjust height to fit new font size */
+        ul {
+            padding: 0;
+            margin: 0; /* Remove default margin and padding */
+        }
+        li {
+            font-family: 'alata';
+            color: #eee;
+            font-weight: 700;
+            padding: 0 10px;
+            height: 45px; /* Adjust height to fit new font size */
+            margin-bottom: 47px; /* Adjust margin to fit new font size */
+            display: block;
+            font-size: 60px; /* Ensure font size matches */
+        }
+    }
+}
+
+.flip {
+    
+    animation: flip 12s cubic-bezier(0.23, 1, 0.32, 1.2) infinite; }
+
+
+@keyframes flip {
+        0% { margin-top: -360px; }
+        5% { margin-top: -270px; }
+        25% { margin-top: -270px; }
+        30% { margin-top: -180px; }
+        50% { margin-top: -180px; }
+        55% { margin-top: -90px; }
+        75% { margin-top: -90px; }
+        80% { margin-top: 0px; }
+        99.99% { margin-top: 0px; }
+        100% { margin-top: -360px; }
+}
+
+/* // Layout ////////////////////////////////////////// */
+
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:300|Oswald);
+
+@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');

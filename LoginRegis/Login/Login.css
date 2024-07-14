@@ -1,0 +1,232 @@
+@font-face {
+    font-family: 'BubbleboddyNeue';
+    src: url('../../res/BubbleboddyNeue.ttf');
+}
+
+@font-face {
+    font-family: 'Alata-Regular';
+    src: url('../../res/Alata-Regular.ttf');
+}
+
+.loader{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.75s;
+}
+
+.loader::after{
+    content: "";
+    width: 30px;
+    height: 30px;
+    border: 10px solid rgb(112, 112, 112);
+    border-top-color: #00a6ff;
+    border-radius: 50%;
+    animation: loading 0.75s ease infinite;
+}
+
+@keyframes loading{
+    from{
+        transform: rotate(0turn);
+    }
+    to{
+        transform: rotate(1turn);
+    }
+}
+
+
+
+body{
+    background-image: url(../../res/Background/BackgroundLogin.png);
+    background-size: cover;
+    margin: 0%;
+    padding: 0%;
+}
+
+.whitebox{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: white;
+    padding: 8%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Title{
+    text-align: center;
+    color: white;
+    width: 100%;
+    font-family: BubbleboddyNeue;
+    font-size: 60px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.611);
+    margin-bottom: 5%;
+}
+
+.FormTitle{
+    font-family: Alata-Regular;
+    color: #0B055C;
+    line-height: 45px;
+    font-size: 40px;
+    margin-bottom: 8%;
+}
+
+.wrapper{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.LoginRegisForm{
+    font-family: Alata-Regular;
+    font-size: 25px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.InputLabel{
+    margin-bottom: 2%;
+}
+
+.InputText{
+    font-family: Alata-Regular;
+    font-size: 20px;
+    border: none;
+    border-bottom: 2px solid #363636; /* Change #000 to any color you prefer */
+    outline: none;
+}
+
+.RememberMeWrapper{
+    display: flex;
+    justify-content: baseline;
+    align-items: center;
+    width: 50%;
+}
+
+.Remembermetext{
+    font-size: 18px;
+}
+
+.ForgotWrapper{
+    justify-content: end;
+    align-items: center;
+    display: flex;
+    width: 50%;
+}
+
+.ForgotRememberWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12%;
+}
+
+.ForgotPassword{
+    color: #190ea9;
+}
+
+.ForgotPassword:visited{
+    color: #190ea9;
+}
+
+.button{
+    background-color: #0B055C;
+    color: white;
+    border-radius: 200px;
+    padding: 3%;
+    font-family: Alata-Regular;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.button:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.Signup{
+    text-align: center;
+    font-size: 18px;
+    font-family: Alata-Regular;
+    padding-bottom: 0;
+    padding-top: 12%;
+    padding-bottom: 8%;
+}
+
+.x-wrapper{
+    display: flex;
+    display: none;
+    width: 100%;
+    justify-content: end;
+}
+
+.fa-x{
+    margin-top: 5%;
+    font-size: 25px;
+    transition: all 0.3s ease;
+}
+
+.fa-x:hover{
+    cursor: pointer;
+    transform: scale(1.3);
+}
+
+.passwordContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.InputText.password{
+    width: 90%;
+}
+
+.show-password-icon{
+    width: 10%;
+    font-size: 20px;
+    text-align: center;
+    margin: 0%;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+    .wrapper{
+        width: 80%;
+    }
+
+    .Title{
+        font-size: 30px;
+    }
+
+    .FormTitle{
+        font-size: 30px;
+    }
+
+    .LoginRegisForm{
+        font-size: 18px;
+    }
+
+    .InputText{
+        font-size: 15px;
+    }
+
+    .Remembermetext{
+        font-size: 14px;
+    }
+
+    .Signup{
+        font-size: 14px;
+    }
+
+}

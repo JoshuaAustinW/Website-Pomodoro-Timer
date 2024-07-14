@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pomodoro Timer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+        }
+        .timer-section {
+            width: 30%;
+        }
+        .timer-section h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .timer {
+            font-size: 48px;
+            margin: 20px 0;
+        }
+        input {
+            width: 80%;
+            margin: 10px 0;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pomodoro Timer</h1>
+    <div class="container">
+        <div class="timer-section">
+            <h2>Focus Time</h2>
+            <input type="number" id="focusTimeInput" value="25" onkeydown="updateTimeOnEnter(event, 'focus')">
+            <div class="timer" id="focusTimer">25:00</div>
+            <button onclick="setMode('focus')">Focus</button>
+        </div>
+        <div class="timer-section">
+            <h2>Short Break Time</h2>
+            <input type="number" id="shortBreakTimeInput" value="5" onkeydown="updateTimeOnEnter(event, 'shortBreak')">
+            <div class="timer" id="shortBreakTimer">05:00</div>
+            <button onclick="setMode('shortBreak')">Short Break</button>
+        </div>
+        <div class="timer-section">
+            <h2>Long Break Time</h2>
+            <input type="number" id="longBreakTimeInput" value="15" onkeydown="updateTimeOnEnter(event, 'longBreak')">
+            <div class="timer" id="longBreakTimer">15:00</div>
+            <button onclick="setMode('longBreak')">Long Break</button>
+        </div>
+    </div>
+    <div>
+        <button onclick="startTimer()">Start</button>
+        <button onclick="pauseTimer()">Pause</button>
+        <button onclick="stopTimer()">Stop</button>
+    </div>
+
+    <script>
+        let timer;
+        let timeLeft;
+        let currentMode = 'focus';
+        let isPaused = false;
+
+        function getTimeFromInput(id) {
+            const value = parseInt(document.getElementById(id).value);
+            return isNaN(value) ? 0 : value * 60;
+        }
+
+        function setMode(mode) {
+            clearInterval(timer);
+            currentMode = mode;
+            timeLeft = getTimeFromInput(`${mode}TimeInput`);
+            updateTimers();
+        }
+
+        function startTimer() {
+            clearInterval(timer);
+            timeLeft = getTimeFromInput(`${currentMode}TimeInput`);
+            isPaused = false;
+            timer = setInterval(updateTimer, 1000);
+        }
+
+        function pauseTimer() {
+            if (isPaused) {
+                isPaused = false;
+                timer = setInterval(updateTimer, 1000);
+            } else {
+                isPaused = true;
+                clearInterval(timer);
+            }
+        }
+
+        function stopTimer() {
+            clearInterval(timer);
+            timeLeft = getTimeFromInput(`${currentMode}TimeInput`);
+            updateTimers();
+        }
+
+        function updateTimer() {
+            if (!isPaused) {
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    return;
+                }
+                timeLeft--;
+                updateTimers();
+            }
+        }
+
+        function updateTimers() {
+            document.getElementById('focusTimer').innerText = formatTime(currentMode === 'focus' ? timeLeft : getTimeFromInput('focusTimeInput'));
+            document.getElementById('shortBreakTimer').innerText = formatTime(currentMode === 'shortBreak' ? timeLeft : getTimeFromInput('shortBreakTimeInput'));
+            document.getElementById('longBreakTimer').innerText = formatTime(currentMode === 'longBreak' ? timeLeft : getTimeFromInput('longBreakTimeInput'));
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+        }
+
+        function updateTimeOnEnter(event, mode) {
+            if (event.key === 'Enter') {
+                const inputElement = document.getElementById(`${mode}TimeInput`);
+                const inputValue = parseInt(inputElement.value);
+                if (!isNaN(inputValue)) {
+                    if (currentMode === mode) {
+                        timeLeft = inputValue * 60;
+                    }
+                    updateTimers();
+                }
+            }
+        }
+
+        function initializeTimers() {
+            document.getElementById('focusTimer').innerText = formatTime(getTimeFromInput('focusTimeInput'));
+            document.getElementById('shortBreakTimer').innerText = formatTime(getTimeFromInput('shortBreakTimeInput'));
+            document.getElementById('longBreakTimer').innerText = formatTime(getTimeFromInput('longBreakTimeInput'));
+            timeLeft = getTimeFromInput('focusTimeInput');
+        }
+
+        window.onload = function() {
+            initializeTimers();
+        }
+    </script>
+</body>
+</html>

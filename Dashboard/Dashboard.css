@@ -1,0 +1,1509 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
+@font-face {
+    font-family: 'BubbleboddyNeue';
+    src: url('../res/BubbleboddyNeue.ttf');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'alata';
+
+}
+
+
+body{
+    background-image: url(../res/Background/BackgroundLogin.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: 30%;
+    margin: 0%;
+    padding: 0%;
+    overflow: hidden;
+    cursor: default;
+
+
+
+    /*   SUPAYA G BISA DI SELECT   */
+
+    -webkit-user-select: none; 
+    -moz-user-select: none;    
+    -ms-user-select: none;     
+    user-select: none;    
+}
+
+
+
+
+
+.loader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.75s;
+}
+
+.loader::after{
+    content: "";
+    width: 30px;
+    height: 30px;
+    border: 10px solid rgb(255, 255, 255);
+    border-top-color: #00a6ff;
+    border-radius: 50%;
+    animation: loading 0.75s ease infinite;
+}
+
+@keyframes loading{
+    from{
+        transform: rotate(0turn);
+    }
+    to{
+        transform: rotate(1turn);
+    }
+}
+
+
+.loader.note{
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}
+
+.loader.popupnote{
+    display: none;
+}
+
+.loader.popupnotedelete{
+    display: none;
+}
+
+.loader.popupnotedelete::after{
+    content: "";
+    width: 20px;
+    height: 20px;
+    border: 5px solid rgb(123, 123, 123);
+    border-top-color: #00a6ff;
+    border-radius: 50%;
+    animation: loading 0.75s ease infinite;
+}
+
+
+
+
+/* BRAND */
+.Brand
+{
+position: absolute;
+width: 190px;
+height: 64px;
+left: 31px;
+top: 4%;
+font-family: 'BubbleboddyNeue';
+font-style: normal;
+font-weight: 700;
+font-size: 60px;
+line-height: 64px;
+text-decoration: underline;
+color: #FFFFFF;
+text-shadow: 0px 4px 5px #000000ac;
+z-index: 1;
+}
+
+.WelcomeUserText{
+    position: absolute;
+    right: 2%;
+    top: 5%;
+    font-size: 20px;
+    color: white;
+    font-family: 'alata';
+    background-color: rgba(0, 0, 0, 0.551);
+    border-radius: 20px;
+    width: fit-content;
+    padding: 1%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.Background{
+    display: block;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: 80%;
+    box-sizing: border-box;
+    z-index: -1;
+}
+
+/* body {
+    background-color: rgb(210, 210, 210);
+} */
+
+.container {
+    position: absolute;
+    width: 100%;
+    height: 100%; /* Remove ini kalo mau resizeable*/
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    /* size: fixed;  */
+}
+
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center ;
+    overflow: hidden;
+    width: 45%;
+    height: 65%; /* Remove ini kalo mau resizeable*/
+    box-sizing: border-box;
+    background: linear-gradient(50.45deg, rgba(0, 0, 0, 0.607) 24.49%, rgba(115, 115, 115, 0.536) 105.05%);
+    box-shadow: 0px 0px 55.7px #FFFFFF;
+    backdrop-filter: blur(21.35px);
+    border-radius: 60px;
+    padding: 3%;
+    padding-left: 6%;
+    padding-right: 6%;
+    /* max-width: fit-content;
+    size-adjust: fixed; */
+}
+
+/* .focus-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #FFFFFF;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+    font-size: 18px;
+    text-align: center;
+    box-shadow: 0px 0px 5px #FFFFFF;
+}
+
+.focus-input::placeholder {
+    color: #FFFFFF;
+    opacity: 0.7;
+} */
+
+
+.main button {
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    width: 150px;
+    background-color: transparent;
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+#work-button, #short-button, #long-button {
+    border-radius: 75px;
+    font-size: 20px;
+}
+
+.main button:hover {
+    background-color: rgba(126, 89, 250, 0.3);
+}
+
+.selected, 
+#work-button.active, 
+#short-button.active, 
+#long-button.active,
+#start-button.active,
+#pause-button.active,
+#continue-button.active,
+#reset-button.active {
+    background-color: #7E59FA !important;
+    border: none;
+    color: #FFFFFF;
+}
+
+#start-button, #pause-button, #continue-button, #reset-button{
+    margin-top: 5%;
+    margin-bottom: 0%;
+    font-size: 30px;
+    border-radius: 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+#start-button:hover{
+    transform: scale(1.2);
+}
+
+.timer-settings{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3%;
+}
+
+.timer-option {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; /* adjust the gap value to your liking */
+  }
+
+.timer-area {
+    font-size: 100px;
+    margin-top: 10px;
+    color: #FFFFFF;
+}
+
+.SpotifyPlaylist{
+    width: 100%;
+    margin-bottom: 0;
+    height: 180px;
+}
+
+.PlaylistContainer{
+    display: flex;
+    visibility: hidden;
+    transform: translateX(-100%);
+    flex-direction: column;
+    position: absolute;
+    width: 20%;
+    height: fit-content;
+    z-index: 2;
+    bottom: 2%;
+    gap: 20px;
+    left: 1%;
+    padding: 3%;
+    padding-top: 2%;
+    padding-bottom: 1%;
+    background-image: linear-gradient(50.45deg, #05052eac, rgba(62, 12, 59, 0.641));
+    border-radius: 30px;
+    backdrop-filter: blur(21.35px);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.PlaylistContainer.show{
+    visibility: visible;
+    transform: translateX(0%);
+}
+
+.inputPlaylist{
+    border-radius: 10px;
+    border-color: white;
+    background-color: rgba(0, 0, 0, 0.501);
+    padding: 2%;
+    padding-left: 7%;
+    caret-color: white;
+    color: white;
+    margin-bottom: 3%;
+}
+
+.inputPlaylist::placeholder{
+    color: rgba(255, 255, 255, 0.381);
+}
+
+.inputPlaylist:focus{
+    outline: none;
+}
+
+.CustomPlaylist{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius:15px;
+}
+
+.CustomPlaylistButton{
+    border-radius: 10px;
+    font-size: 25px;
+    font-family: Alata;
+    border: none;
+    color: white;
+    background-image: linear-gradient(#7E59FA, #c759fa);
+    transition: all 0.3s ease;
+}
+
+.CustomPlaylistButton:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.CustomPlaylistButton:active{
+    transform: scale(0.95)
+}
+
+.PlaylistTitle{
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.PlaylistDesc{
+    color: white;
+    font-size: 16px;
+    text-align: justify;
+}
+
+.fa-x{
+    color: white;
+    font-size: 25px;
+    transition: all 0.3s ease;
+}
+
+.fa-x:hover{
+    cursor: pointer;
+    transform: scale(1.3);
+}
+
+.x-wrapper{
+    display: flex;
+    justify-content: end;
+}
+
+.MusicButton{
+    position: absolute;
+    bottom: 4%;
+    left: 2%;
+    color: white;
+    background-color: #000062;
+
+    background: linear-gradient(50.45deg, rgba(0, 0, 0, 0.607) 24.49%, rgba(115, 115, 115, 0.536) 105.05%);
+    backdrop-filter: blur(21.35px);
+    border: solid;
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.73);
+
+    width: fit-content;
+    font-size: 30px;
+    text-align: center;
+    padding: 1.3%;
+    padding-right: 1.6%;
+    padding-left: 1.6%;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.MusicButton:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.MusicButton:active{
+    transform: scale(1);
+}
+
+.BackgroundBlur{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(30px)  brightness(0.8);
+    z-index: 3;
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: all 0.3s ease;
+    display: none;
+}
+
+.BackgroundBlur.show{
+    transform: translateX(0%);
+    visibility: visible;
+}
+
+.MenuButton{
+    position: absolute;
+    right: 2%;
+    bottom: 4%;
+    color: white;
+
+    background-image: linear-gradient(50.45deg, rgba(0, 0, 0, 0.607) 24.49%, rgba(115, 115, 115, 0.536) 105.05%);
+    backdrop-filter: blur(21.35px);
+    border: solid;
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.73);
+
+    width: fit-content;
+    font-size: 30px;
+    text-align: center;
+    padding: 1.3%;
+    padding-right: 1.6%;
+    padding-left: 1.6%;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.MenuButton:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.Menu{
+    position: absolute;
+    gap: 0;
+    justify-content: center;
+    top: 0%;
+    right: 0%;
+    width: 70%;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 4;
+    transform: translateX(100%);
+    transition: all 0.5s ease;
+    visibility: hidden;
+    display: none;
+
+
+
+    /*
+
+    visibility: visible;
+    transform: translateX(0%); 
+
+    */
+}
+
+.Menu.show{
+    transform: translateX(0%);
+    visibility: visible;
+}
+
+.NavBar{
+    background-color: #000062;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4%;
+    align-items: center;
+    padding: 4%;
+}
+
+.MenuContent{
+    background-image: url('../res/Background/MenuBackground.png');
+    background-size: cover;
+    width: 70%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.MenuTitle{
+    color: white;
+    width: 100%;
+    padding:8%;
+    font-size: 25px;
+    transition: all 0.3s ease;
+}
+
+.MenuTitle.selected{
+    color: white;
+    width: 100%;
+    padding:8%;
+    font-size: 25px;
+    transition: all 0.3s ease;
+    background-image: linear-gradient(90deg, #F18EFB, #7E59FA, #4B3594);
+}
+
+.MenuTitle.selected:hover{
+    cursor: default;
+    color: white;
+}
+
+
+.MenuTitle:hover{
+    background-color: #7E59FA;
+    color: black;
+    cursor: pointer;
+}
+
+.CloseMenuButton{
+    color: white;
+    position: absolute;
+    top: 2%;
+    left: 2%;
+    font-size: 35px;
+    transition: all 0.3s ease;
+}
+
+.CloseMenuButton:hover{
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.ThemesMenu{
+    width: 100%;
+    height: 100%;
+    visibility: visible;
+    transform: translateY(0%);
+    transition: all 0.2s ease-out;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.ThemesGrid{
+    width: 90%;
+    height: 90%;
+
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    grid-template-rows: repeat(3, 2fr);
+    gap: 5%;
+}
+
+.ThemeBackgroundContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.ThemeBackgroundContainer:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.ThemeBackgroundContainer:active{
+    transform: scale(1);
+}
+
+.ThemeImage{
+    background-color: white;
+    width: 90%;
+    height: 100%;
+    border-radius: 15px;
+}
+
+.ThemeName{
+    color: white;
+    font-size: Alata;
+    margin-top: 3%;
+}
+
+.ModeMenu{
+    width: 100%;
+    height: 100%;
+    visibility: visible;
+    transform: translateY(0%);
+    transition: all 0.2s ease-out;
+    color:#FFFFFF;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.ModeMenu::-webkit-scrollbar {
+    display: none;
+}
+
+.StatsMenu{
+    width: 100%;
+    height: 100%;
+    visibility: visible;
+    transform: translateY(0%);
+    transition: all 0.2s ease-out;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.StatsMenu::-webkit-scrollbar {
+    display: none;
+}
+
+.StatsContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+
+}
+
+.chartContainer{
+    width: 80%;
+    height: 60%;
+    padding: 3%;
+    background-color: white;
+    border-radius: 30px;
+    margin-top: 6%;
+}
+
+.statsChart{
+    color: black;
+    width: 100%;
+    height: 100%;
+    padding: 3%;
+}
+
+.NotesMenu{
+    width: 100%;
+    height: 100%;
+    visibility: visible;
+    transform: translateY(0%);
+    transition: all 0.2s ease-out;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.NotesMenu::-webkit-scrollbar {
+    display: none;
+}
+
+.NotesMenuTitle{
+    color: white;
+    font-size: 55px;
+}
+
+.NotesContainer{
+    width: 100%;
+    height: 100%;
+    padding: 5%;
+}
+
+.NoteList{
+    width: 90%;
+    height: 75%;
+    margin-top: 2%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.NoteItem{
+    width: 92%;
+    height: 25%;
+    font-size: 30px;
+    margin-bottom: 3%;
+    margin-top: 3%;
+    padding: 2%;
+    padding-left: 3%;
+    border-radius: 20px;
+    color: rgb(0, 0, 0);
+    background-color: #ffffff;
+}
+
+.ProfileMenu{
+    width: 100%;
+    height: 100%;
+    visibility: visible;
+    transform: translateY(0%);
+    transition: all 0.2s ease-out;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.ProfileMenu::-webkit-scrollbar {
+    display: none;
+}
+
+.ProfileInformationContainer{
+    color: white;
+    width: 85%;
+    font-size: 25px;
+    margin-top: 5%;
+    line-height: 50px;
+    margin-left: 5%;
+}
+
+.ButtonLogout{
+    position: absolute;
+    bottom: 9%;
+    right: 5%;
+    background: linear-gradient(50.45deg, rgba(0, 0, 0, 0.607) 24.49%, rgba(115, 115, 115, 0.536) 105.05%);
+    backdrop-filter: blur(21.35px);
+    border: solid;
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.73);
+    color: white;
+    padding: 2%;
+    padding-left: 3%;
+    padding-right: 3%;
+    font-size: 25px;
+    border-radius: 30px;
+    border: solid white 1px;
+
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+.ButtonLogout:hover{
+    cursor: pointer;
+    color: white;
+    transform: scale(1.2);
+}
+
+
+/* popup */
+.focus-container {
+    width: 100%;
+  position: relative;
+
+}
+
+.focus-input {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #FFFFFF;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+    font-size: 18px;
+    text-align: center;
+    box-shadow: 0px 0px 5px #FFFFFF;
+    cursor: pointer;
+}
+
+.focus-input::placeholder {
+    color: #FFFFFF;
+    opacity: 0.7;
+}
+
+.popup {
+    display: flex;
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    transition: background-color 0.5s ease-in-out, visibility 0s 0.5s;
+    backdrop-filter: blur(60%);
+}
+
+.popup-content {
+    text-align: center;
+    align-items: center;
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    width: 38%;
+    max-width: 800px;
+    height: auto;
+    max-height: 90vh;
+    padding: 3%;
+    /* background-image: linear-gradient(50.45deg, #05052eac, rgba(62, 12, 59, 0.641), blue); */
+
+
+    /*    background-image: linear-gradient(90deg, rgb(68, 68, 177), #c053ff, #4B3594);     */
+
+    /* Tes Warna Lain */
+    background-image: linear-gradient(rgba(72, 37, 126, 0.633), rgb(0, 0, 0));
+    backdrop-filter: blur(50px);
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.633);
+
+
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    overflow-y: auto;
+    color: white;
+    transform: translateY(100%);
+    opacity: 0;
+    /* backdrop-filter: blur(5px); */
+}
+
+.popup.active {
+    visibility: visible;
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(20px);
+    transition: background-color 0.7s ease-in-out, visibility 0s 0s;
+}
+
+.popup.active .popup-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.popup-content h2 {
+    margin-bottom: 20px;
+    font-size: 35px;
+}
+
+/* .popup-input {
+    width: 70%;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 25px;
+} */
+
+.popup-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.popup-submit {
+    padding: 15px 25px;
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.popup-submit:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    
+}
+/* end */
+
+
+/* CHECKBOX ARGHHHHH */
+.custom-checkbox {
+    display: inline-flex;
+    align-items: center;
+    width: 70%;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.custom-checkbox:focus-within {
+    border-color: #FFFFFF;
+    box-shadow: 0px 0px 5px #FFFFFF;
+}
+
+.custom-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-custom {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-right: 15px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    transition: background-color 0.3s;
+}
+
+.checkbox-custom::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 8px;
+    top: 3px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .checkbox-custom::after {
+    display: block;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .checkbox-custom {
+    background-color: #8a2be2; /* Purple color */
+}
+
+.checkbox-input {
+    flex-grow: 1;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 25px;
+}
+
+.checkbox-input:focus {
+    outline: none;
+}
+
+.checkbox-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.checkbox-custom:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .checkbox-custom + .checkbox-input {
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+
+/* ModeMenu Content */
+/* ModeMenu Content */
+
+.Modecontainer{
+    width: 100%;
+    height: 100%;
+    padding-top: 5%;
+}
+
+.mode-section {
+    margin-bottom: 40px;
+    color: white;
+    font-family: 'Alata', sans-serif;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mode-header {
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+.mode-dropdown {
+    width: 100%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid white;
+    color: white;
+    font-family: 'Alata', sans-serif;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.timer-lengths {
+    display: flex;
+    justify-content:space-around;
+    margin-bottom: 20px;
+    /* margin-right: 20%; */
+}
+
+.timer-column {
+    width: 15%;
+}
+
+.timer-column label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.timer-input-container {
+    position: relative;
+    width: 100%;
+}
+
+.timer-input {
+    width: 100%;
+    padding: 10px 50px 10px 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid white;
+    color: white;
+    font-family: 'Alata', sans-serif;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.timer-unit {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.auto-sequence {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-right: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #8a2be2;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.auto-sequence-text {
+    flex-grow: 1;
+}
+
+.auto-sequence-description {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 5px;
+}
+
+/* Ensure inputs only accept numbers */
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+/* input[type="number"] {
+    -moz-appearance: textfield;
+} */
+
+/* end */
+
+
+/* end */
+
+.ThemesMenu.hidden, .ModeMenu.hidden, .StatsMenu.hidden, .NotesMenu.hidden, .ProfileMenu.hidden{
+    visibility: hidden;
+    transform: translateY(100%);
+}
+
+
+.NoteItem{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.NoteTitle{
+    width: 80%;
+}
+
+.NoteButtons{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 5%;
+    gap: 10px;
+}
+
+.NoteButton{
+    width: 100%;
+    padding: 3%;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.NoteButton:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.NoteButton.edit{
+    background-color: #3D15C1;
+    color: white;
+}
+
+.NoteButton.delete{
+    background-color: #CE2626;
+    color: white;
+}   
+
+
+.NoteBackgroundBlur{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    backdrop-filter: blur(50px);
+    filter: brightness(0.9);
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+
+    visibility: visible;
+    transition: all 0.5s ease;
+    transform: translateY(0%);
+}
+
+.NoteBackgroundBlur.hidden{
+    visibility: hidden;
+    transform: translateY(-200%);
+}
+
+
+.PopupNote{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: linear-gradient(rgba(72, 37, 126, 0.633), rgb(0, 0, 0));
+    backdrop-filter: blur(50px);
+    border: solid;
+    border-color: rgba(255, 255, 255, 0.733);
+    border-width: 1px;
+    width: 60%;
+    height: 60%;
+    padding: 5%;
+    padding-bottom: 3%;
+    padding-top: 3%;
+    gap: 5%;
+    z-index: 2;
+    visibility: visible;
+    transition: all 0.5s ease;
+}
+
+.PopupNote.hidden{
+    visibility: hidden;
+    transform: translate(-50%, -200%);
+}
+
+.PopupNoteTitle{
+    background-color: rgba(255, 255, 255, 0.27);
+    border-radius: 20px;
+    border-color: rgba(255, 255, 255, 0.86);
+    border-width: 1px;
+    padding: 2%;
+    font-size: 28px;
+    color: white;
+    width: 100%;
+}
+
+.PopupNoteTitle::placeholder, .PopupNoteContent::placeholder{
+    color: rgba(255, 255, 255, 0.59);
+}
+
+.PopupNoteContent{
+    resize: none;
+    background-color: rgba(255, 255, 255, 0.27);
+    border-radius: 20px;
+    border-color: rgba(255, 255, 255, 0.86);
+    border-width: 1px;
+    height: 100%;
+    width: 100%;
+    padding: 2%;
+    font-size: 28px;
+    color: white;
+}
+
+.notewrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.PopupNoteButtonWrapper{
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    gap: 1%;
+}
+
+.PopupNoteButton{
+    font-size: 20px;
+    padding: 1%;
+    width: 10%;
+    border-radius: 10px;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.PopupNoteButton:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.PopupNoteButton.Save{
+    background-color: #a415c1;
+    color: white;
+}
+
+.PopupNoteButton.Cancel{
+    background-color: #CE2626;
+    color: white;
+}
+
+.fa-x.NoteBackground{
+    color: white;
+    font-size: 30px;
+    position: absolute;
+    top: 4%;
+    right: 2%;
+}
+
+.AddNoteButton{
+    background-image: linear-gradient(50.45deg, rgba(0, 0, 0, 0.607) 24.49%, rgba(115, 115, 115, 0.536) 105.05%);
+    backdrop-filter: blur(21.35px);
+    border-color: white;
+    border: solid;
+    border-width: 1px;
+    color: white;
+    z-index: 1;
+    width: 15%;
+    overflow: hidden;
+    height: 5%;
+    position: absolute;
+    bottom: 4%;
+    left: 50%;
+    font-size: 1.6rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1%;
+    padding-left: 2%;
+    padding-right: 2%;
+    border-radius: 50px;
+    transform: translateX(-50%);
+    transition: all 0.3s ease;
+}
+
+.AddNoteButton:hover{
+    cursor: pointer;
+    background-image: linear-gradient(50.45deg, rgba(0, 0, 0, 0.529) 24.49%, rgba(115, 115, 115, 0.375) 105.05%);
+    background-color: #c759fa;
+}
+
+.NotesMessage{
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 2rem;
+    width: 50%;
+}
+
+.PotraitModeProhibited{
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    z-index: 5;
+    transition: all 0.3s ease;
+    background-color: white;
+}
+
+.PotraitModeProhibited.text{
+    position: absolute;
+    font-size: 3rem;
+    color: black;
+}
+
+.MenuText{
+    display: inline;
+}
+
+.CloseMenuButtonMobile{
+    display: none;
+    color: white;
+    font-size: 30px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 50%;
+}
+
+.CloseMenuButtonMobile:hover{
+    color: black;
+    background-color: #7E59FA;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+
+
+    .popup-content{
+        transform: scale(0.1);
+        height: 80%;
+        width: 90%;
+    }
+
+    .popup-content::-webkit-scrollbar {
+        display: none;
+    }
+
+    .main{
+        transform: scale(0.5);
+        width: 180%;
+        height: 90%;
+    }
+
+    .AddNoteButton{
+        width: 50%;
+    }
+
+    .focus-container{
+        width: 70%;
+    }
+
+    .PotraitModeProhibited{
+        display: none;
+        max-width: 768px;
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .Menu{
+        width: 100%;
+    }
+
+    .CloseMenuButton{
+        display: none;
+    }
+
+    .NavBar{
+        width: 15%;
+        padding: 0%;
+        padding-top: 3%;
+        gap: 1%;
+        overflow: hidden;
+        overflow-y: scroll;
+    }
+
+    .NavBar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .MenuContent{
+        width: 85%;
+    }
+
+    .MenuTitle{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 50%;
+    }
+
+    .MenuTitle.selected{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 50%;
+    }
+
+    .MenuText{
+        display: none;
+    }
+
+    .CloseMenuButtonMobile{
+        display: flex;
+    }
+
+    .PlaylistContainer{
+        width: 70%;
+        padding: 10%;
+    }
+
+    .ThemesGrid{
+        width: 90%;
+        height: 50%;
+    }
+
+    .Brand{
+        font-size: 35px;
+    }
+
+    .Modecontainer{
+        transform: scale(0.5) translateX(-45%);
+        width: 180%;
+    }
+
+    .ProfileInformationContainer{
+        transform: scale(0.5) translateX(-45%);
+        width: 180%;
+    }
+
+    .ButtonLogout{
+        transform: scale(0.8);
+    }
+
+    .PopupNoteButton{
+        width: 30%;
+    }
+
+    .MenuButton{
+        font-size: 25px;
+    }
+
+    .MusicButton{
+        font-size: 25px;
+    }
+
+    .PopupNote{
+        width: 80%;
+    }
+}
+
