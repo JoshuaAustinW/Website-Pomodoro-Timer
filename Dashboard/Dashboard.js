@@ -190,6 +190,12 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('continue-button').style.display = "none";
     }
 
+    function resetTimerDisplayAndButtons() {
+        resetTimer(); 
+        updateTimerDisplay();
+        resetButtonStates(); 
+    }
+
     function switchTimer() {
         const userInput = getUserInput();
         
@@ -211,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 minutes = userInput.work;
                 console.log("Done with break, switching to focus");
             }
-        }
+        } else {resetTimerDisplayAndButtons();}
         
         seconds = 0;
         updateTimerDisplay();
