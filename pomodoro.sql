@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 02, 2024 at 04:08 PM
+-- Generation Time: Jul 14, 2024 at 09:44 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -39,7 +39,27 @@ CREATE TABLE `notes` (
 --
 
 INSERT INTO `notes` (`id`, `user_id`, `title`, `content`) VALUES
-(3, 1, 'TesNote', 'Akhirnya bisa cokkk');
+(7, 1, 'Halo', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pomodoro_sessions`
+--
+
+CREATE TABLE `pomodoro_sessions` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `session_duration` int(11) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pomodoro_sessions`
+--
+
+INSERT INTO `pomodoro_sessions` (`id`, `user_id`, `session_duration`, `date`) VALUES
+(1, 1, 51, '2024-07-14');
 
 -- --------------------------------------------------------
 
@@ -59,7 +79,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`) VALUES
-(1, 'joshua', 'noturavgaustin@gmail.com', '$2y$10$vVOn4w.TeL4N14ij0HTNne.iPQl0i3LVuLCv9K9pOsR.x73NpcCqG');
+(1, 'joshua', 'noturavgaustin@gmail.com', '$2y$10$vVOn4w.TeL4N14ij0HTNne.iPQl0i3LVuLCv9K9pOsR.x73NpcCqG'),
+(2, 'oztin', 'joshuaaustin789@gmail.com', '$2y$10$Semq0fm2La4pbtvfR3oRrOpxfJqpevyVkt.FL3H0X9GPBWAciPE22');
 
 --
 -- Indexes for dumped tables
@@ -70,6 +91,13 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`) VALUES
 --
 ALTER TABLE `notes`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pomodoro_sessions`
+--
+ALTER TABLE `pomodoro_sessions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_user_date` (`user_id`,`date`) USING BTREE;
 
 --
 -- Indexes for table `users`
@@ -85,13 +113,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `notes`
 --
 ALTER TABLE `notes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `pomodoro_sessions`
+--
+ALTER TABLE `pomodoro_sessions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
