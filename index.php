@@ -10,6 +10,11 @@
     @import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
     </style>
     <script src="index.js"></script>
+    <script>
+        function scrollToSection() {
+        document.getElementById("section").scrollIntoView({ behavior: 'smooth' });
+    }
+    </script>
 </head>
 <body>
 
@@ -22,7 +27,7 @@
                 
                 <div class="Right">
                     <div class="Button" id="About" onclick="OpenPage('About.html')">About</div>
-                    <div class="Button" id="Features" onclick="OpenPage('Features/Features.php')">Features</div>
+                    <div class="Button" id="Features" onclick="scrollToSection()">Features</div>
                     <div class="Button Filled" id="LoginButton" onclick="OpenPage('LoginRegis/Login/Login.php')" style="font-weight:bold !important">Login</div>
                 </div>
 
@@ -70,7 +75,7 @@
             </div>
 
             <div class="Description">
-                <h1>Designed for you to get all done</h1>
+                <h1 id="section">Designed for you to get all done</h1>
 
                 <div> We’re here to redefine the way you work and recharge every day, without overcomplicating it.  </div>
             </div>
