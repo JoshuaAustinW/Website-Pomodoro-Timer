@@ -237,7 +237,7 @@ body.features-page .features-container {
     transform: translateY(0);
     opacity: 1;
   }
-  
+
 .features{
     display: flex;
     flex-direction: column;
@@ -281,6 +281,14 @@ body.features-page .features-container {
     grid-template-columns: 1fr 1fr;
     gap: 5%;
     margin-bottom: 5%;
+    opacity: 0; /* Start as invisible */
+    transform: translateY(50px); /* Start slightly below */
+    transition: opacity 1s ease-out, transform 1s ease-out; /* Define the transition */
+}
+
+.Preview.in-view {
+    opacity: 1; /* Become visible */
+    transform: translateY(0); /* Move to original position */
 }
 
 .Preview:hover{
