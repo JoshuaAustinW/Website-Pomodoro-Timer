@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentTimer = "work";
     let minutes, seconds;
 
+    let currentMode = 'pomodoro';
+
     // auto sequence
     let isAutoSequence = false;
     let workSessionsCompleted = 0;
@@ -77,12 +79,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     
     function updateTitle(timerContent) {
-        if (isRunning) {
-            document.title = `${timerContent} - Pomodoro Timer`;
-        } else {
-            document.title = "Pomodoro Timer";
+        if (currentMode !== 'stopwatch') { // Check if the current mode is not stopwatch
+            if (isRunning) {
+                document.title = `${timerContent} - Pomodoro Timer`;
+            } else {
+                document.title = "Pomodoro Timer";
+            }
         }
     }
+    
 
     function updateTimerDisplay() {
         const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
@@ -424,13 +429,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Add event listener to mode dropdown
+    // Add event listener to mode dropdown
     document.querySelector('.mode-dropdown').addEventListener('change', function() {
-        if (this.value === 'stopwatch') {
-            switchToStopwatch();
-        } else {
-            switchToPomodoro();
-        }
+    if (this.value === 'stopwatch') {
+        currentMode = 'stopwatch'; // Update the current mode
+        switchToStopwatch();
+    } else {
+        currentMode = 'pomodoro'; // Update the current mode
+        switchToPomodoro();
+    }
     });
+
 
     // Initialize with Pomodoro mode
     switchToPomodoro();
@@ -668,6 +677,7 @@ function ChangeMenuStats(){
                             backgroundColor: 'rgba(75, 192, 192, 0.2)',
                             borderColor: 'rgba(75, 192, 192, 1)',
                             borderWidth: 1
+                            
                         }]
                     },
                     options: {
