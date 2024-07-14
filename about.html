@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - DORO</title>
+    <script>function OpenPage(a){
+        window.location.href = a;
+    }
+    </script>
+    <style>
+        @font-face {
+            font-family: 'BubbleboddyNeue';
+            src: url('res/BubbleboddyNeue.ttf');
+        }
+
+        @font-face {
+            font-family: 'Alata-Regular';
+            src: url('res/Alata-Regular.ttf');
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-image: url(res/Background/Gradient1.png);
+            background-attachment: scroll;
+            background-repeat: repeat;
+            background-size: cover;
+            font-family: 'Alata-Regular', sans-serif;
+            color: white;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            /* max-width: 1300px; */
+            margin: 0;
+            padding: 20px;
+        }
+
+        .MenuBar{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 98%;
+        margin-top: 8px;
+}
+
+        .Title{
+        width: fit-content;
+        display: inline-block;
+        color: white;
+        font-family: BubbleboddyNeue;
+        font-size: 65px;
+        z-index: 1;
+        margin-left: 1%;
+        margin-top: -1%;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.64);
+}
+
+        .Right {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .Button {
+            font-family: 'Alata-regular';
+    font-weight: 400;
+    font-size: 25px;
+    color: white;
+    padding: 10px 20px;
+    margin: 0 10px;
+    /* padding-top: 20px;
+    padding-bottom: 20px; */
+    transition: all 0.3s ease;
+    /* text-shadow:  5px 5px 0 rgba(0, 0, 0, 0.486); */
+            cursor: pointer;
+        }
+
+        .Button:hover {
+            transform: scale(1.1);
+        }
+
+        .Filled {
+            border: white solid 2px;
+            border-radius: 200px;
+        }
+
+        .about-section {
+            display: flex;
+            flex-direction: column;
+            align-items:center;
+            text-align: justify;
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .about-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-description {
+            font-size: 1.2rem;
+            max-width: 800px;
+            line-height: 1.6;
+        }
+
+        .team-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .team-member {
+            width: 250px;
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: scaleIn 0.5s forwards;
+            animation-delay: calc(var(--delay) * 0.2s);
+        }
+
+        @keyframes scaleIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 3px solid white;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member img:hover {
+            transform: scale(1.1);
+        }
+
+        .team-member h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member p {
+            font-size: 1rem;
+            color: #e0e0e0;
+        }
+
+        .mission-section {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 4rem;
+            max-width: 800px;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+            animation-delay: 1s;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .mission-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .mission-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .footer {
+            width: 100%;
+            background-color: #000062;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: auto;
+        }
+
+        .footerDesc {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footerTitle {
+            font-family: BubbleboddyNeue, sans-serif;
+            font-size: 2rem;
+        }
+
+        .footerContacts {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footerButton {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .footerButton:hover {
+            text-decoration: underline;
+            transform: scale(1.1);
+        }
+
+        .footerCopyright {
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .MenuBar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .Right {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .team-section {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footerDesc {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrapper">
+        <div class="MenuBar">
+
+            <a href="index.php" style="text-decoration: none" class="Title">DORO</a>
+            
+            <div class="Right">
+                <div class="Button" id="Home" onclick="OpenPage('index.php')">Home</div>
+                <div class="Button" id="Features" onclick="OpenPage('index.php')">Features</div>
+                <div class="Button Filled" id="LoginButton" onclick="OpenPage('LoginRegis/Login/Login.php')" style="font-weight:bold !important">Login</div>
+            </div>
+
+        </div>
+
+        <div class="about-section">
+            <h1 class="about-title">About DORO</h1>
+            <p class="about-description">
+                DORO is a productivity application based on the Pomodoro Technique. Our mission is to help you manage your time effectively and boost your productivity by breaking your work into focused intervals with regular breaks.<br>
+                The Pomodoro Technique is a time management method developed by Francesco Cirillo in the late 1980s. It uses a timer to break work into intervals, traditionally 25 minutes in length, separated by short breaks. DORO takes this simple but effective concept and enhances it with features such as task tracking, analytics, and customizable intervals.
+            </p>
+        </div>
+
+        <div class="team-section">
+            <div class="team-member" style="--delay: 1;">
+                <img src="res/Images/img1.jpg" alt="Team Member 1">
+                <h3>Joshua Austin W</h3>
+                <p>Developer</p>
+            </div>
+            <div class="team-member" style="--delay: 2;">
+                <img src="res/Images/img2.jpg" alt="Team Member 2">
+                <h3>Miguel Ferdinand B</h3>
+                <p>Developer</p>
+            </div>
+            <div class="team-member" style="--delay: 3;">
+                <img src="res/Images/img3.jpg" alt="Team Member 3">
+                <h3>Vanessha Wijaya</h3>
+                <p>Developer</p>
+            </div>
+        </div>
+
+        <div class="mission-section">
+            <h2 class="mission-title">Our Mission</h2>
+            <p class="mission-description">
+                At DORO, our mission is to empower individuals and teams to unlock their full potential by providing intuitive and effective productivity tools. We believe that by helping people manage their time and tasks more efficiently, we can contribute to a world where everyone has the opportunity to achieve their goals while maintaining a healthy work-life balance. Our commitment to innovation, user-centric design, and continuous improvement drives us to create solutions that adapt to the ever-changing needs of our users.
+            </p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footerDesc">
+            <div class="footerTitle">DORO</div>
+            <div class="footerContacts">
+                <div class="footerButton">Contact</div>
+                <div class="footerButton">Support</div>
+                <div class="footerButton">Privacy Policy</div>
+            </div>
+        </div>
+        <div class="footerCopyright">&copy; DORO. All rights reserved.</div>
+    </div>
+</body>
+</html>
