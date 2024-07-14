@@ -1,0 +1,86 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const pipButton = document.getElementById('popupbtn');
+    const timerContainer = document.querySelector('.container');
+    let pipWindow = null;
+
+     // Function to dynamically add a script tag
+     function loadExternalScript(url) {
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = url;
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+        });
+    }
+
+    pipButton.addEventListener('click', togglePiP);
+    async function togglePiP() {
+        if (!pipWindow) {
+            try {
+                await loadExternalScript('Dashboard.js');
+
+                pipWindow = await documentPictureInPicture.requestWindow({
+                    width: 320,
+                    height: 240
+                });
+               
+                
+                const pipContent = timerContainer.cloneNode(true);
+                pipWindow.document.body.appendChild(pipContent);
+
+                // Copy styles
+                const styles = Array.from(document.styleSheets)
+                    .filter(sheet => !sheet.href || sheet.href.startsWith(window.location.origin))
+                    .map(sheet => {
+                        try {
+                            return Array.from(sheet.cssRules).map(rule => rule.cssText).join('');
+                        } catch (e) {
+                            console.warn('Cannot access stylesheet', e);
+                            return '';
+                        }
+                    })
+                    .join('\n');
+
+                const styleElement = document.createElement('style');
+                styleElement.textContent = styles;
+                pipWindow.document.head.appendChild(styleElement);
+
+                const scriptElement = pipWindow.document.createElement('script');
+
+                // Set the src attribute to load Dashboard.js
+                scriptElement.src = 'Dashboard.js';
+
+                // Append the script element to the head of the pipWindow document
+                pipWindow.document.head.appendChild(scriptElement);
+
+                // Synchronize timer state
+                setInterval(() => {
+                    const mainTimer = document.querySelector('.timer-area p:not([style*="display: none"])');
+                    const pipTimer = pipWindow.document.querySelector('.timer-area p:not([style*="display: none"])');
+                    if (mainTimer && pipTimer) {
+                        pipTimer.textContent = mainTimer.textContent;
+                    }
+                }, 1000);
+
+                pipWindow.addEventListener('unload', () => {
+                    pipWindow = null;
+                });
+
+            } catch (error) {
+                console.error('Failed to enter Picture-in-Picture mode:', error);
+            }
+        } else {
+            pipWindow.close();
+            pipWindow = null;
+        }
+    }
+});
+
+
+
+
+<button id="popupbtn" title="Toggle PIP Mode" class="popupbtn">PiP</button>
+
+
+

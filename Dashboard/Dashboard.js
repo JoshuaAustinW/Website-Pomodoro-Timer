@@ -12,8 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentTimer = "work";
     let minutes, seconds;
 
-    let currentMode = 'pomodoro';
-
     // auto sequence
     let isAutoSequence = false;
     let workSessionsCompleted = 0;
@@ -79,15 +77,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     
     function updateTitle(timerContent) {
-        if (currentMode !== 'stopwatch') { // Check if the current mode is not stopwatch
-            if (isRunning) {
-                document.title = `${timerContent} - Pomodoro Timer`;
-            } else {
-                document.title = "Pomodoro Timer";
-            }
+        if (isRunning) {
+            document.title = `${timerContent} - Pomodoro Timer`;
+        } else {
+            document.title = "Pomodoro Timer";
         }
     }
-    
 
     function updateTimerDisplay() {
         const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
@@ -195,12 +190,6 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('continue-button').style.display = "none";
     }
 
-    function resetTimerDisplayAndButtons() {
-        resetTimer(); 
-        updateTimerDisplay();
-        resetButtonStates(); 
-    }
-
     function switchTimer() {
         const userInput = getUserInput();
         
@@ -222,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 minutes = userInput.work;
                 console.log("Done with break, switching to focus");
             }
-        } else {resetTimerDisplayAndButtons();}
+        }
         
         seconds = 0;
         updateTimerDisplay();
@@ -429,17 +418,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Add event listener to mode dropdown
-    // Add event listener to mode dropdown
     document.querySelector('.mode-dropdown').addEventListener('change', function() {
-    if (this.value === 'stopwatch') {
-        currentMode = 'stopwatch'; // Update the current mode
-        switchToStopwatch();
-    } else {
-        currentMode = 'pomodoro'; // Update the current mode
-        switchToPomodoro();
-    }
+        if (this.value === 'stopwatch') {
+            switchToStopwatch();
+        } else {
+            switchToPomodoro();
+        }
     });
-
 
     // Initialize with Pomodoro mode
     switchToPomodoro();
@@ -677,7 +662,6 @@ function ChangeMenuStats(){
                             backgroundColor: 'rgba(75, 192, 192, 0.2)',
                             borderColor: 'rgba(75, 192, 192, 1)',
                             borderWidth: 1
-                            
                         }]
                     },
                     options: {
