@@ -1,3 +1,78 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const pipButton = document.getElementById('popupbtn');
+    const timerContainer = document.querySelector('.container');
+    let pipWindow = null;
+
+    // Function to dynamically add a script tag
+    function loadExternalScript(url) {
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = url;
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+        });
+    }
+
+    pipButton.addEventListener('click', togglePiP);
+    async function togglePiP() {
+        if (!pipWindow) {
+            try {
+                await loadExternalScript('Dashboard.js');
+
+                pipWindow = await documentPictureInPicture.requestWindow({
+                    width: 320,
+                    height: 240
+                });
+
+                // Create a new div to hold the timer content
+                const pipContent = document.createElement('div');
+                pipContent.className = 'timer-area';
+                const timerText = document.querySelector('.timer-area p:not([style*="display: none"])').cloneNode(true);
+                pipContent.appendChild(timerText);
+                pipWindow.document.body.appendChild(pipContent);
+
+                // Copy styles
+                const styles = Array.from(document.styleSheets)
+                    .filter(sheet => !sheet.href || sheet.href.startsWith(window.location.origin))
+                    .map(sheet => {
+                        try {
+                            return Array.from(sheet.cssRules).map(rule => rule.cssText).join('');
+                        } catch (e) {
+                            console.warn('Cannot access stylesheet', e);
+                            return '';
+                        }
+                    })
+                    .join('\n');
+
+                const styleElement = document.createElement('style');
+                styleElement.textContent = styles;
+                pipWindow.document.head.appendChild(styleElement);
+
+                // Synchronize timer state
+                setInterval(() => {
+                    const mainTimer = document.querySelector('.timer-area p:not([style*="display: none"])');
+                    const pipTimer = pipWindow.document.querySelector('.timer-area p:not([style*="display: none"])');
+                    if (mainTimer && pipTimer) {
+                        pipTimer.textContent = mainTimer.textContent;
+                    }
+                }, 1000);
+
+                pipWindow.addEventListener('unload', () => {
+                    pipWindow = null;
+                });
+
+            } catch (error) {
+                console.error('Failed to enter Picture-in-Picture mode:', error);
+            }
+        } else {
+            pipWindow.close();
+            pipWindow = null;
+        }
+    }
+});
+
+
 document.addEventListener('DOMContentLoaded', function () {
     const workTimer = document.getElementById('work-timer');
     const shortTimer = document.getElementById('short-timer');
@@ -11,6 +86,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let isRunning = false;
     let currentTimer = "work";
     let minutes, seconds;
+
+    let currentMode = 'pomodoro';
 
     // auto sequence
     let isAutoSequence = false;
@@ -77,12 +154,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     
     function updateTitle(timerContent) {
-        if (isRunning) {
-            document.title = `${timerContent} - Pomodoro Timer`;
-        } else {
-            document.title = "Pomodoro Timer";
+        if (currentMode !== 'stopwatch') { // Check if the current mode is not stopwatch
+            if (isRunning) {
+                document.title = `${timerContent} - Pomodoro Timer`;
+            } else {
+                document.title = "Pomodoro Timer";
+            }
         }
     }
+    
 
     function updateTimerDisplay() {
         const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
@@ -190,6 +270,12 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('continue-button').style.display = "none";
     }
 
+    function resetTimerDisplayAndButtons() {
+        resetTimer(); 
+        updateTimerDisplay();
+        resetButtonStates(); 
+    }
+
     function switchTimer() {
         const userInput = getUserInput();
         
@@ -211,7 +297,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 minutes = userInput.work;
                 console.log("Done with break, switching to focus");
             }
-        }
+        } else {resetTimerDisplayAndButtons();}
         
         seconds = 0;
         updateTimerDisplay();
@@ -418,13 +504,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Add event listener to mode dropdown
+    // Add event listener to mode dropdown
     document.querySelector('.mode-dropdown').addEventListener('change', function() {
-        if (this.value === 'stopwatch') {
-            switchToStopwatch();
-        } else {
-            switchToPomodoro();
-        }
+    if (this.value === 'stopwatch') {
+        currentMode = 'stopwatch'; // Update the current mode
+        switchToStopwatch();
+    } else {
+        currentMode = 'pomodoro'; // Update the current mode
+        switchToPomodoro();
+    }
     });
+
 
     // Initialize with Pomodoro mode
     switchToPomodoro();
@@ -662,6 +752,7 @@ function ChangeMenuStats(){
                             backgroundColor: 'rgba(75, 192, 192, 0.2)',
                             borderColor: 'rgba(75, 192, 192, 1)',
                             borderWidth: 1
+                            
                         }]
                     },
                     options: {

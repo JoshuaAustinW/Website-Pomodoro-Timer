@@ -325,6 +325,11 @@ body.features-page .features-container {
     background-image: url(res/Images/Notes.png);
 }
 
+
+.PreviewImg-container.Focus{
+    background-image: url(res/Images/Stats.png);
+}
+
 .PreviewDesc{
     display: flex;
     flex-direction: column;
@@ -351,7 +356,7 @@ body.features-page .features-container {
 }
 
 .PreviewParagraph{
-    width: 40%;
+    width: 70%;
     font-size: 30px;
 }
 

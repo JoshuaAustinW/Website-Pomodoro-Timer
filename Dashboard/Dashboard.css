@@ -1379,7 +1379,22 @@ input[type="number"]::-webkit-outer-spin-button {
     background-color: #7E59FA;
 }
 
+.MenuButton.PiP{
+    right: 8%;
+    padding: 0%;
+    transform: scale(0.8);
+    bottom: 2.5%;
 
+    border-radius: 35px;
+    
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.ImagePip{
+    transform: scale(0.5);
+    padding: 0;
+
+}
 
 @media only screen and (max-width: 768px) {
 

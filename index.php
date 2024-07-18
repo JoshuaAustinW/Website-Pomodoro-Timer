@@ -130,19 +130,19 @@
 
                 <div class="PreviewDesc">
                     <h1 class="PreviewTitle">Dashboard</h1>
-                    <p class="PreviewParagraph">We’re here to redefine the way you work and recharge every day, without overcomplicating it.</p>
+                    <p class="PreviewParagraph">Featuring an elegant and intuitive interface, it allows you to seamlessly manage your work and break intervals using the Pomodoro technique. </p>
                 </div>
             </div>
 
 
             <div class="Preview">
                 <div class="PreviewDescLeft">
-                    <h1 class="PreviewTitle">Focus Mode</h1>
-                    <p class="PreviewParagraph">We’re here to redefine the way you work and recharge every day, without overcomplicating it.</p>
+                    <h1 class="PreviewTitle">Stats</h1>
+                    <p class="PreviewParagraph">The Stats Track History for Focus Time feature allows you to monitor and analyze your productivity over time.</p>
                 </div>
 
                 <div class="PreviewImgLeft">
-                    <div class="PreviewImg-container">
+                    <div class="PreviewImg-container Focus">
                         
                     </div>
                 </div>
@@ -158,7 +158,7 @@
 
                 <div class="PreviewDesc">
                     <h1 class="PreviewTitle">Notes</h1>
-                    <p class="PreviewParagraph">We’re here to redefine the way you work and recharge every day, without overcomplicating it.</p>
+                    <p class="PreviewParagraph">Quickly jot down thoughts, reminders, or important information with a clean, straightforward interface.</p>
                 </div>
             </div>
             
@@ -166,7 +166,7 @@
             <div style="margin-bottom: 3%; margin-top: 5%;" class="Description">
                 <h1 style="margin-bottom: 0;">Your personal dashboard awaits</h1>
 
-                <div> Lorem ipsum dolor de amet  </div>
+                <div> Join us today to get more done! </div>
             </div>
 
             <button class="Button Gotobrand" onclick="OpenPage('LoginRegis/Login/Login.php')"> Get started now</button>

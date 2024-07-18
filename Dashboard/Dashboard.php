@@ -101,6 +101,7 @@
     </div>
 
 
+    <button id="popupbtn" class="MenuButton PiP" title="Toggle PIP Mode" class="popupbtn"><img class="ImagePip" src="../res/Icons/Pip.png"></button>
 
     <div class="MenuButton" id="MenuButton" onclick="OpenMenu()"><i class="fa-solid fa-gear"></i></div>
 
@@ -369,6 +370,7 @@
                 <button id="pause-button" style="display:none;">Pause</button>
                 <button id="continue-button" style="display:none;">Continue</button>
                 <button id="reset-button" style="display:none;">Reset</button>
+                
             </div>
         </div>
     </div>
