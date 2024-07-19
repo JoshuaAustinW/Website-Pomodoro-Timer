@@ -177,9 +177,9 @@
         <div class="footerDesc">
             <div class="footerTitle">DORO</div>
             <div class="footerContacts">
-                <div class="footerButton">contact</div>
-                <div class="footerButton">support</div>
-                <div class="footerButton">privacy policy</div>
+                <div class="footerButton" onclick="OpenPage('contactpage.html')">contact</div>
+                <div class="footerButton" onclick="OpenPage('support.html')">support</div>
+                <div class="footerButton" onclick="OpenPage('privacypolicy.html')">privacy policy</div>
             </div>
         </div>
 

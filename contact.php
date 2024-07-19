@@ -1,15 +1,33 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - DORO</title>
+    <!-- Include SweetAlert2 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+<!-- Include SweetAlert2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>document.addEventListener('DOMContentLoaded', function() {
+    <?php if ($thankYouMessage): ?>
+        Swal.fire({
+            title: 'Success!',
+            text: '<?php echo addslashes($thankYouMessage); ?>',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    <?php endif; ?>
+});
+</script>
+    <title>Contact Us - DORO</title>
     <script>function OpenPage(a){
         window.location.href = a;
     }
     </script>
     <style>
-        @font-face {
+         @font-face {
             font-family: 'BubbleboddyNeue';
             src: url('res/BubbleboddyNeue.ttf');
         }
@@ -97,7 +115,7 @@
             flex-direction: column;
             align-items:center;
             text-align: justify;
-            margin-bottom: 4rem;
+            margin-bottom: 2rem;
             opacity: 0;
             transform: translateY(50px);
             animation: fadeInUp 1s forwards;
@@ -109,18 +127,6 @@
                 transform: translateY(0);
             }
         }
-
-        .about-title {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .about-description {
-            font-size: 1.2rem;
-            max-width: 800px;
-            line-height: 1.6;
-        }
-
         .team-section {
             display: flex;
             flex-wrap: wrap;
@@ -145,57 +151,10 @@
             }
         }
 
-        .team-member img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 1rem;
-            border: 3px solid white;
-            transition: transform 0.3s ease;
-        }
-
-        .team-member img:hover {
-            transform: scale(1.1);
-        }
-
-        .team-member h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .team-member p {
-            font-size: 1rem;
-            color: #e0e0e0;
-        }
-
-        .mission-section {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 10px;
-            margin-bottom: 4rem;
-            max-width: 800px;
-            opacity: 0;
-            animation: fadeIn 1s forwards;
-            animation-delay: 1s;
-        }
-
         @keyframes fadeIn {
             to {
                 opacity: 1;
             }
-        }
-
-        .mission-title {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .mission-description {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            text-align: justify;
         }
 
         .footer {
@@ -261,12 +220,53 @@
                 gap: 1rem;
             }
         }
+
+        .contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-image: linear-gradient(#816CF7, #E07DFC);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); 
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+    animation-delay: 0.5s;
+}
+
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color:rgba(255, 255, 255, 0.8);
+            color: black;
+        }
+
+        .contact-form textarea {
+            height: 150px;
+        }
+
+        .contact-form button {
+            background-color: #000062;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #000090;
+        }
     </style>
 </head>
 <body>
     <div class="content-wrapper">
         <div class="MenuBar">
-
             <a href="index.php" style="text-decoration: none" class="Title">DORO</a>
             
             <div class="Right">
@@ -274,53 +274,54 @@
                 <div class="Button" id="Features" onclick="OpenPage('index.php')">Features</div>
                 <div class="Button Filled" id="LoginButton" onclick="OpenPage('LoginRegis/Login/Login.php')" style="font-weight:bold !important">Login</div>
             </div>
-
         </div>
 
         <div class="about-section">
-            <h1 class="about-title">About DORO</h1>
+            <h1 class="about-title">Contact Us</h1>
             <p class="about-description">
-                DORO is a productivity application based on the Pomodoro Technique. Our mission is to help you manage your time effectively and boost your productivity by breaking your work into focused intervals with regular breaks.<br>
-                The Pomodoro Technique is a time management method developed by Francesco Cirillo in the late 1980s. It uses a timer to break work into intervals, traditionally 25 minutes in length, separated by short breaks. DORO takes this simple but effective concept and enhances it with features such as task tracking, analytics, and customizable intervals.
+                We'd love to hear from you! Whether you have questions, feedback, or just want to say hello, feel free to reach out to us using the form below.
             </p>
         </div>
 
-        <div class="team-section">
-            <div class="team-member" style="--delay: 1;">
-                <img src="res/Images/img1.jpg" alt="Team Member 1">
-                <h3>Joshua Austin W</h3>
-                <p>Developer</p>
-            </div>
-            <div class="team-member" style="--delay: 2;">
-                <img src="res/Images/img2.jpg" alt="Team Member 2">
-                <h3>Miguel Ferdinand B</h3>
-                <p>Developer</p>
-            </div>
-            <div class="team-member" style="--delay: 3;">
-                <img src="res/Images/img3.jpg" alt="Team Member 3">
-                <h3>Vanessha Wijaya</h3>
-                <p>Developer</p>
-            </div>
-        </div>
-
-        <div class="mission-section">
-            <h2 class="mission-title">Our Mission</h2>
-            <p class="mission-description">
-                At DORO, our mission is to empower individuals and teams to unlock their full potential by providing intuitive and effective productivity tools. We believe that by helping people manage their time and tasks more efficiently, we can contribute to a world where everyone has the opportunity to achieve their goals while maintaining a healthy work-life balance. Our commitment to innovation, user-centric design, and continuous improvement drives us to create solutions that adapt to the ever-changing needs of our users.
-            </p>
+        <div class="contact-form">
+            <form id="contact-form" action="https://formspree.io/f/mjkbknaw" method="POST" target="hidden-iframe">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <input type="text" name="subject" placeholder="Subject" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+            
+            <iframe name="hidden-iframe" style="display:none;"></iframe>
+            
+            
         </div>
     </div>
+
 
     <div class="footer">
         <div class="footerDesc">
             <div class="footerTitle">DORO</div>
             <div class="footerContacts">
-                <div class="footerButton" onclick="OpenPage('contactpage.html')">contact</div>
-                <div class="footerButton" onclick="OpenPage('support.html')">support</div>
-                <div class="footerButton" onclick="OpenPage('privacypolicy.html')">privacy policy</div>
+                <div class="footerButton">Contact</div>
+                <div class="footerButton">Support</div>
+                <div class="footerButton">Privacy Policy</div>
             </div>
         </div>
         <div class="footerCopyright">&copy; DORO. All rights reserved.</div>
     </div>
+    
+
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            // Check if the form is submitted
+            setTimeout(function() {
+                window.location.href = 'contactpage.html';
+            }, 1000); // Redirect after 1 second (adjust as needed)
+        });
+    </script>
+
+    
+    
 </body>
 </html>
