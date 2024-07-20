@@ -1431,6 +1431,11 @@ input[type="number"]::-webkit-outer-spin-button {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+.MenuButton.PiP:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
 .ImagePip{
     transform: scale(0.5);
     padding: 0;
