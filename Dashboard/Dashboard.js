@@ -811,74 +811,132 @@ function ChangeMenuNote(){
     ChangeMenu('Notes');
 }
 
-function ChangeMenuStats(){
+function ChangeMenuStats() {
+    const statsMenu = document.getElementById('StatsMenu');
+    
+    if (!document.querySelector('.date-range-selector')) {
+        const rangeSelector = document.createElement('div');
+        rangeSelector.className = 'date-range-selector';
+        rangeSelector.innerHTML = `
+            <input type="radio" id="all" name="dateRange" value="all" checked>
+            <label for="all">All Time</label>
+            <input type="radio" id="7days" name="dateRange" value="7days">
+            <label for="7days">Last 3 Days</label>
+            <input type="radio" id="biweekly" name="dateRange" value="biweekly">
+            <label for="biweekly">Bi-weekly</label>
+            <input type="radio" id="monthly" name="dateRange" value="monthly">
+            <label for="monthly">Monthly</label>
+        `;
+        statsMenu.insertBefore(rangeSelector, statsMenu.firstChild);
+    }
+
+    const radioButtons = document.querySelectorAll('input[name="dateRange"]');
+    radioButtons.forEach(radio => {
+        radio.addEventListener('change', fetchAndUpdateChart);
+    });
+
+    fetchAndUpdateChart();
+    ChangeMenu('Stats');
+}
+
+function fetchAndUpdateChart() {
+    const selectedRange = document.querySelector('input[name="dateRange"]:checked').value;
+    console.log('Fetching data for range:', selectedRange); // Debug log
+
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'GetStats.php?', true);
+    xhr.open('GET', `GetStats.php?range=${selectedRange}`, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
-                const sessions = JSON.parse(xhr.responseText);
-                const dates = sessions.map(session => {
-                    const sessionDate = new Date(session.date);
-                    const formattedDate = new Date(sessionDate.getFullYear(), sessionDate.getMonth(), sessionDate.getDate());
-                    return formattedDate;
-                });
-                const totalTimes = sessions.map(session => (session.session_duration/60).toFixed(2));
-
-                const ctx = document.getElementById('statsChart').getContext('2d');
-
-                let existingChart = Chart.getChart(ctx);
-                if (existingChart) {
-                    existingChart.destroy();
-                }
-
-
-                const statsChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: dates,
-                        datasets: [{
-                            label: 'Total Focus Time (minutes)',
-                            data: totalTimes,
-                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1
-                            
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            x: {
-                                type: 'time',
-                                time: {
-                                    parser: 'yyyy-MM-dd',
-                                    tooltipFormat: 'yyyy-MM-dd',
-                                    unit: 'day',
-        
-                                    displayFormats: {
-                                        day: 'yyyy-MM-dd' 
-                                    }
-                                }
-                            },
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
+                console.log('Received data:', xhr.responseText); // Debug log
+                try {
+                    const sessions = JSON.parse(xhr.responseText);
+                    if (sessions.length > 0) {
+                        createChart(sessions, selectedRange);
+                    } else {
+                        displayNoDataMessage();
                     }
-                });
+                } catch (error) {
+                    console.error('Error parsing JSON:', error);
+                    displayErrorMessage('Error parsing data');
+                }
             } else {
                 console.error('Error:', xhr.statusText);
+                displayErrorMessage('Error fetching data');
             }
         }
     };
     xhr.send();
-
-    ChangeMenu('Stats');
 }
 
+function createChart(sessions, selectedRange) {
+    const dates = sessions.map(session => new Date(session.date));
+    const totalTimes = sessions.map(session => (session.session_duration / 60).toFixed(2));
 
+    const ctx = document.getElementById('statsChart');
+
+    // Destroy existing chart 
+    if (Chart.getChart(ctx)) {
+        Chart.getChart(ctx).destroy();
+    }
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: dates,
+            datasets: [{
+                label: 'Total Focus Time (minutes)',
+                data: totalTimes,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'day',
+                        displayFormats: {
+                            day: 'yyyy-MM-dd'
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Date'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Focus Time (minutes)'
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: `Focus Time Statistics - ${selectedRange === 'all' ? 'All Time' : selectedRange}`
+                }
+            }
+        }
+    });
+}
+
+function displayNoDataMessage() {
+    const ctx = document.getElementById('statsChart').getContext('2d');
+    ctx.font = '20px Arial';
+    ctx.fillText('No data available for the selected range', 10, 50);
+}
+
+function displayErrorMessage(message) {
+    const ctx = document.getElementById('statsChart').getContext('2d');
+    ctx.font = '20px Arial';
+    ctx.fillText(message, 10, 50);
+}
 // Popup functionality
 document.addEventListener('DOMContentLoaded', function() {
     const focusInput = document.querySelector('.focus-input');

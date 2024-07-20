@@ -234,6 +234,19 @@
             </div>
 
             <div class="StatsMenu hidden" id="StatsMenu">
+                <div class="date-range-selector" id="date-range-selector">
+                    <input type="radio" id="all" name="dateRange" value="all" checked>
+                    <label for="all">All Time</label>
+
+                    <input type="radio" id="7days" name="dateRange" value="7days">
+                    <label for="7days">Last 3 Days</label>
+
+                    <input type="radio" id="biweekly" name="dateRange" value="biweekly">
+                    <label for="biweekly">Bi-weekly</label>
+
+                    <input type="radio" id="monthly" name="dateRange" value="monthly">
+                    <label for="monthly">Monthly</label>
+                </div>
                 <div class="StatsContainer">
                     Your Stats
                     <div class="chartContainer">

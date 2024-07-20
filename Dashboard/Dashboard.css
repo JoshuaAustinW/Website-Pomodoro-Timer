@@ -196,6 +196,47 @@ z-index: 1;
     color: #FFFFFF;
     opacity: 0.7;
 } */
+.date-range-selector {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .date-range-selector input[type="radio"] {
+    display: none;
+  }
+  
+  .date-range-selector label {
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #333;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .date-range-selector label:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .date-range-selector input[type="radio"]:checked + label {
+    background-image: linear-gradient(#7E59FA, #c759fa);
+    color: white;
+  }
+  
+  @media (max-width: 600px) {
+    .date-range-selector {
+      flex-wrap: wrap;
+    }
+    
+    .date-range-selector label {
+      flex: 1 0 40%;
+      text-align: center;
+    }
+  }
 
 
 .main button {
