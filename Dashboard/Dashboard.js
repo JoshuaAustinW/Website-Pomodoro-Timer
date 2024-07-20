@@ -25,11 +25,29 @@ document.addEventListener('DOMContentLoaded', function() {
                     height: 240
                 });
 
-                // Create a new div to hold the timer content
+                
                 const pipContent = document.createElement('div');
-                pipContent.className = 'timer-area';
+                pipContent.className = 'pip-content';
+                
+                
+                const timerArea = document.createElement('div');
+                timerArea.className = 'timer-area';
                 const timerText = document.querySelector('.timer-area p:not([style*="display: none"])').cloneNode(true);
-                pipContent.appendChild(timerText);
+                timerArea.appendChild(timerText);
+                pipContent.appendChild(timerArea);
+
+                const buttonContainer = document.createElement('div');
+                buttonContainer.className = 'timer-settings';
+                ['start', 'pause', 'continue', 'reset'].forEach(buttonId => {
+                    const button = document.createElement('button');
+                    button.id = `pip-${buttonId}-button`;
+                    button.textContent = buttonId.charAt(0).toUpperCase() + buttonId.slice(1);
+                    button.style.display = document.getElementById(`${buttonId}-button`).style.display;
+                    button.addEventListener('click', () => document.getElementById(`${buttonId}-button`).click());
+                    buttonContainer.appendChild(button);
+                });
+                pipContent.appendChild(buttonContainer);
+
                 pipWindow.document.body.appendChild(pipContent);
 
                 // Copy styles
@@ -45,21 +63,94 @@ document.addEventListener('DOMContentLoaded', function() {
                     })
                     .join('\n');
 
+
+                const pipStyles = `
+                    body {
+                        margin: 0;
+                        padding: 0;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 100vh;
+                        font-family: Arial, sans-serif;
+                    }
+                    .pip-content {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        width: 100%;
+                        height: 100%;
+                    }
+                    .timer-area {
+                        font-size: 20vw;
+                        margin-bottom: 2vh;
+                        margin-top:0;
+                    }
+                    .timer-settings {
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        gap: 1vh;
+                    }
+                    .timer-settings button {
+                        font-size: 8vw;
+                        padding: 1vh 2vw;
+                        margin: 0.7vh;
+                        background-color: rgba(126, 89, 250, 0.3);
+                        color: white;
+                        border: 1px solid #FFFFFF;
+                        border-radius: 12px;
+                        cursor: pointer;
+                        transition: background-color 0.3s;
+                    }
+                    .timer-settings button:hover {
+                        // background-color: #7E59FA !important;
+                        background-image: linear-gradient(#7E59FA, #c759fa);
+                    }
+                `;
+
                 const styleElement = document.createElement('style');
-                styleElement.textContent = styles;
+                styleElement.textContent = styles + pipStyles;
                 pipWindow.document.head.appendChild(styleElement);
 
-                // Synchronize timer state
-                setInterval(() => {
+                
+                function updatePiP() {
                     const mainTimer = document.querySelector('.timer-area p:not([style*="display: none"])');
-                    const pipTimer = pipWindow.document.querySelector('.timer-area p:not([style*="display: none"])');
+                    const pipTimer = pipWindow.document.querySelector('.timer-area p');
                     if (mainTimer && pipTimer) {
                         pipTimer.textContent = mainTimer.textContent;
                     }
-                }, 1000);
+
+                    ['start', 'pause', 'continue', 'reset'].forEach(buttonId => {
+                        const mainButton = document.getElementById(`${buttonId}-button`);
+                        const pipButton = pipWindow.document.getElementById(`pip-${buttonId}-button`);
+                        if (mainButton && pipButton) {
+                            pipButton.style.display = mainButton.style.display;
+                        }
+                    });
+                }
+
+                
+                const observer = new MutationObserver(updatePiP);
+                observer.observe(document.querySelector('.container'), {
+                    childList: true,
+                    subtree: true,
+                    attributes: true,
+                    attributeFilter: ['style']
+                });
+
+                updatePiP();
+
+                const resizeObserver = new ResizeObserver(() => {
+                    updatePiP();
+                });
+                resizeObserver.observe(pipWindow.document.body);
 
                 pipWindow.addEventListener('unload', () => {
                     pipWindow = null;
+                    observer.disconnect();
+                    resizeObserver.disconnect();
                 });
 
             } catch (error) {
