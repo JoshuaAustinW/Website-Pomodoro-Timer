@@ -216,6 +216,23 @@
             max-width: 800px;
             line-height: 1.6;
         }
+        .AnimatedGradient {
+    background: linear-gradient(90deg, rgba(120,0,217,1) 0%, rgba(255,30,220,1) 39%, rgba(143,110,235,1) 65%, rgba(41,25,217,1) 100%);
+    background-size: 800% 800%;
+    animation: GradientAnimation 10s ease infinite;
+    transition: transform 0.3s ease;
+}
+
+.AnimatedGradient:hover {
+    transform: scale(1.05);
+}
+
+@keyframes GradientAnimation {
+    0% {background-position: 0% 50%}
+    50% {background-position: 100% 50%}
+    100% {background-position: 0% 50%}
+}
+
     </style>
 </head>
 <body>
@@ -226,7 +243,7 @@
             <div class="Right">
                 <div class="Button" id="Home" onclick="OpenPage('index.php')">Home</div>
                 <div class="Button" id="Features" onclick="OpenPage('index.php')">Features</div>
-                <div class="Button Filled" id="LoginButton" onclick="OpenPage('LoginRegis/Login/Login.php')" style="font-weight:bold !important">Login</div>
+                <div class="Button Filled AnimatedGradient" id="LoginButton" onclick="OpenPage('LoginRegis/Login/Login.php')" style="font-weight:bold !important">Login</div>
             </div>
         </div>
 

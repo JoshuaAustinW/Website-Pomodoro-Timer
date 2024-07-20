@@ -28,7 +28,7 @@
                 <div class="Right">
                     <div class="Button" id="About" onclick="OpenPage('About.html')">About</div>
                     <div class="Button" id="Features" onclick="scrollToSection()">Features</div>
-                    <div class="Button Filled" id="LoginButton" onclick="OpenPage('LoginRegis/Login/Login.php')" style="font-weight:bold !important">Login</div>
+                    <div class="Button Filled AnimatedGradient" id="LoginButton" onclick="OpenPage('LoginRegis/Login/Login.php')" style="font-weight:bold !important">Login</div>
                 </div>
 
             </div>
