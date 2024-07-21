@@ -697,6 +697,24 @@ function OpenMenu(){
       }, 100); 
 }
 
+function OpenMenuFriends(){
+    var Menu = document.getElementById('Menu');
+    var Blur = document.getElementById('BackgroundBlur');
+    var NoteId = document.getElementById('popupnoteid');
+
+    NoteId.value='';
+
+    Menu.style.display='flex';
+    Blur.style.display='block';
+
+    ChangeMenu('Friends');
+
+    setTimeout(function() {
+        Menu.classList.add('show');
+        Blur.classList.add('show');
+      }, 100); 
+}
+
 function CloseMenu(){
     var Menu = document.getElementById('Menu');
     var Blur = document.getElementById('BackgroundBlur');
@@ -754,24 +772,28 @@ function ChangeMenu(a){
     var ButtonStats = document.getElementById('Stats');
     var ButtonNotes = document.getElementById('Notes');
     var ButtonProfile = document.getElementById('Profile');
+    var ButtonFriends = document.getElementById('Friends');
 
     var ThemesContent = document.getElementById('ThemesMenu');
     var ModeContent = document.getElementById('ModeMenu');
     var StatsContent = document.getElementById('StatsMenu');
     var NotesContent = document.getElementById('NotesMenu');
     var ProfileContent = document.getElementById('ProfileMenu');
+    var FriendsContent = document.getElementById('FriendsMenu');
 
     ButtonThemes.classList.remove('selected');
     ButtonMode.classList.remove('selected');
     ButtonStats.classList.remove('selected');
     ButtonNotes.classList.remove('selected');
     ButtonProfile.classList.remove('selected');
+    ButtonFriends.classList.remove('selected');
 
     ThemesContent.classList.add('hidden');
     ModeContent.classList.add('hidden');
     StatsContent.classList.add('hidden');
     NotesContent.classList.add('hidden');
     ProfileContent.classList.add('hidden');
+    FriendsContent.classList.add('hidden');
 
     setTimeout(function() {
         ThemesContent.style.display='none';
@@ -779,6 +801,7 @@ function ChangeMenu(a){
         StatsContent.style.display='none';
         NotesContent.style.display='none';
         ProfileContent.style.display='none';
+        FriendsContent.style.display='none';
 
         switch(a){
             case 'Themes': ThemesContent.style.display='flex'; break;
@@ -786,6 +809,7 @@ function ChangeMenu(a){
             case 'Stats': StatsContent.style.display='block'; break;
             case 'Notes': NotesContent.style.display='block'; break;
             case 'Profile': ProfileContent.style.display='block'; break;
+            case 'Friends': FriendsContent.style.display='block'; break;
         }
         setTimeout(function() {
             document.getElementById(a).classList.add('selected');
@@ -837,6 +861,12 @@ function ChangeMenuStats() {
 
     fetchAndUpdateChart();
     ChangeMenu('Stats');
+}
+
+function ChangeMenuFriends(){
+    OpenMenuFriends();
+    ChangeMenu('Friends');
+    OpenFriendList();
 }
 
 function fetchAndUpdateChart() {
@@ -1074,3 +1104,207 @@ function checkShortLongBreak(){
         shortbreak.value = longbreak.value;
     }
 }
+
+
+
+
+function OpenAddFriendPopup(){
+    CloseMenu();
+    var Blur = document.getElementById('FriendsBackgroundBlur');
+    var AddFriendPopup = document.getElementById('AddFriendPopup');
+
+    Blur.classList.remove('hidden');
+    AddFriendPopup.classList.remove('hidden');
+}
+
+function CloseAddFriendPopup(){
+    var Blur = document.getElementById('FriendsBackgroundBlur');
+    var AddFriendPopup = document.getElementById('AddFriendPopup');
+
+    Blur.classList.add('hidden');
+    AddFriendPopup.classList.add('hidden');
+
+    OpenMenuFriends();
+    ChangeMenu('Friends');
+    OpenPending();
+}
+
+function sendFriendRequest(friend_id) {
+
+    var AddButton = document.getElementById('AddFriendButton'+friend_id.toString());
+    var Loading = document.getElementById('loaderAddfriend'+friend_id.toString());
+
+    AddButton.style.display = 'none';
+    Loading.style.display = 'flex';
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "FriendsPhps/SendFriendRequest.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            CloseAddFriendPopup();
+            alert(xhr.responseText);
+        }
+    };
+    xhr.send("friend_id=" + friend_id);
+}
+
+function CancelRequest(friend_id){
+    var xhr = new XMLHttpRequest();
+            xhr.open("POST", "FriendsPhps/CancelOutgoingRequest.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    OpenPending();
+                }
+            };
+            xhr.send("friend_id=" + friend_id);
+}
+
+function DeclineRequest(friend_id){
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "FriendsPhps/DeclineFriendrequest.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            OpenRequests();
+            alert(xhr.responseText);
+        }
+    };
+    xhr.send("friend_id=" + friend_id);
+}
+
+function AcceptRequest(friend_id){
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "FriendsPhps/AcceptFriendRequest.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            OpenFriendList();
+            alert(xhr.responseText);
+        }
+    };
+    xhr.send("friend_id=" + friend_id);
+}
+
+function RemoveFriend(friend_id){
+    var xhr = new XMLHttpRequest();
+            xhr.open("POST", "FriendsPhps/RemoveFriend.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    OpenFriendList();
+                    alert(xhr.responseText);
+                }
+            };
+            xhr.send("friend_id=" + friend_id);
+}
+
+function OpenFriendList(){
+    var List = document.getElementById('FriendsContentContainer');
+    var Pending = document.getElementById('Pending');
+    var Requests = document.getElementById('Requests');
+    var FriendList = document.getElementById('FriendList');
+
+    Requests.classList.remove('selected');
+    Pending.classList.remove('selected');
+    FriendList.classList.remove('selected');
+
+    FriendList.classList.add('selected');
+
+    List.innerHTML='<div class="loader note" id="Friendloader"></div>';
+
+    var Loader = document.getElementById('Friendloader');
+    Loader.style.display='flex';
+
+    var xhr = new XMLHttpRequest();
+            xhr.open("GET", "FriendsPhps/FetchFriends.php", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    Loader.style.display='none';
+                    List.innerHTML = xhr.responseText;
+                }
+            };
+        xhr.send();
+
+}
+
+function OpenRequests(){
+    var List = document.getElementById('FriendsContentContainer');
+    var Pending = document.getElementById('Pending');
+    var Requests = document.getElementById('Requests');
+    var FriendList = document.getElementById('FriendList');
+
+    Requests.classList.remove('selected');
+    Pending.classList.remove('selected');
+    FriendList.classList.remove('selected');
+
+    Requests.classList.add('selected');
+
+    List.innerHTML='<div class="loader note" id="Friendloader"></div>';
+    var Loader = document.getElementById('Friendloader');
+    Loader.style.display='flex';
+
+    var List = document.getElementById('FriendsContentContainer');
+    var xhr = new XMLHttpRequest();
+            xhr.open("GET", "FriendsPhps/FetchIncomingRequest.php", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    Loader.style.display='none';
+                    List.innerHTML = xhr.responseText;
+                }
+            };
+    xhr.send();
+    
+}
+
+function OpenPending(){
+    var List = document.getElementById('FriendsContentContainer');
+    var Pending = document.getElementById('Pending');
+    var Requests = document.getElementById('Requests');
+    var FriendList = document.getElementById('FriendList');
+
+    Requests.classList.remove('selected');
+    Pending.classList.remove('selected');
+    FriendList.classList.remove('selected');
+
+    Pending.classList.add('selected');
+
+    List.innerHTML='<div class="loader note" id="Friendloader"></div>';
+    var Loader = document.getElementById('Friendloader');
+    Loader.style.display='flex';
+
+    var List = document.getElementById('FriendsContentContainer');
+    var xhr = new XMLHttpRequest();
+            xhr.open("GET", "FriendsPhps/FetchOutgoingRequest.php", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    Loader.style.display='none';
+                    List.innerHTML = xhr.responseText;
+                }
+            };
+    xhr.send();
+}
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const searchInput = document.getElementById('FriendSearch');
+    const ResultList = document.getElementById('SearchResult');
+
+    searchInput.addEventListener('input', function () {
+        const query = searchInput.value;
+        if (query.length > 0) {
+            fetch(`FriendsPhps/SearchUsername.php?query=${query}`)
+                .then(response => response.text())
+                .then(data => {
+                    ResultList.innerHTML = data;
+                })
+                .catch(error => console.error('Error:', error));
+        } else {
+            ResultList.innerHTML = '';
+        }
+    });
+});

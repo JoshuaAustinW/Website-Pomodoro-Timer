@@ -130,6 +130,10 @@
                 <i class="fa-solid fa-note-sticky"></i> <div class="MenuText">Notes</div>
             </div>
 
+            <div class="MenuTitle" id="Friends" onclick="ChangeMenuFriends();">
+                <i class="fa-solid fa-user-group"></i> <div class="MenuText">Friends</div>
+            </div>
+
             <div class="MenuTitle" id="Profile" onclick="ChangeMenu('Profile');">
                 <i class="fa-regular fa-user"></i> <div class="MenuText">Profile</div>
             </div>
@@ -291,6 +295,45 @@
 
             </div>
 
+
+
+
+
+            <div class="FriendsMenu hidden" id="FriendsMenu">
+                <div class="FriendsContainer">
+                    <div class="FriendsTitle">Friends</div>
+
+                    <div class="FriendsButtonContainer">
+                        <button class="FriendsButton selected" id="FriendList" onclick="OpenFriendList()">Friend List</button>
+                        <button class="FriendsButton" id="Requests" onclick="OpenRequests()">Requests</button>
+                        <button class="FriendsButton" id="Pending" onclick="OpenPending()">Pending</button>
+                    </div>
+
+                    <div class="FriendsContentContainer" id="FriendsContentContainer">
+
+                        <div class="loader note" id="Friendloader"></div>
+
+<!--
+
+                        <div class="FriendsItemBox">
+                            <div class="FriendName">Name: WeFriendsTho D':</div>
+                            <div class="ButtonsFriends">
+                                <button class="FriendsButton Cancelation">Cancel</button>
+                            </div>
+                        </div>
+-->
+                    </div>
+
+
+                    <button class="AddfriendButton" onclick="OpenAddFriendPopup()">Add a friend</button>
+
+                </div>
+            </div>
+
+
+
+
+
             <div class="ProfileMenu hidden" id="ProfileMenu">
                 <div class="ProfileInformationContainer">
                     <h1>Profile</h1>
@@ -406,7 +449,17 @@
     </div>
 
 
+    <div class="NoteBackgroundBlur hidden" id="FriendsBackgroundBlur" onclick="CloseAddFriendPopup()">
+        <i class="fa-solid fa-x NoteBackground"></i>
+    </div>
+    <div class="AddFriendPopup hidden" id="AddFriendPopup">
+        <div class="AddFriendWrapper">
+            <input type="text" class="PopupNoteTitle" id="FriendSearch" placeholder="Search for a username">
+            <div class="PopupNoteContent SearchResult" id="SearchResult">
 
+            </div>
+        </div>
+    </div>
 
 
 

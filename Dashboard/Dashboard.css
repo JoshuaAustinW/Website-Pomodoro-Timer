@@ -653,6 +653,204 @@ z-index: 1;
     display: none;
 }
 
+.FriendsMenu{
+    width: 100%;
+    height: 100%;
+    visibility: visible;
+    transform: translateY(0%);
+    transition: all 0.2s ease-out;
+    color:#FFFFFF;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.FriendsMenu::-webkit-scrollbar {
+    display: none;
+}
+
+.FriendsContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1%;
+}
+
+.FriendsTitle{
+    padding: 5%;
+    align-self: baseline;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.FriendsButtonContainer{
+    align-self: baseline;
+    padding: 2%;
+    padding-left: 5%;
+    width: 80%;
+    display: flex;
+    gap: 3%;
+}
+
+.FriendsButton{
+    border-radius: 20px;
+    padding: 2%;
+    font-size: 20px;
+    border-color: white;
+    border-style: solid;
+    border-width: 2px;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.FriendsButton:hover{
+    transform: scale(1.1);
+    background: linear-gradient(90deg, rgba(120,0,217,1) 0%, rgba(255,30,220,1) 39%, rgba(143,110,235,1) 65%, rgba(41,25,217,1) 100%);
+    animation: GradientAnimation 10s ease infinite;
+    background-size: 800% 800%;
+    cursor: pointer;
+}
+
+.FriendsButton.selected{
+    background-color: #c759fa;
+}
+
+.FriendsButton.selected:hover{
+    cursor: default;
+    transform: scale(1);
+    background: none;
+}
+
+.AddFriendPopupButton{
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    padding: 5%;
+    border-radius: 30px;
+    background: linear-gradient(90deg, rgba(120,0,217,1) 0%, rgba(255,30,220,1) 39%, rgba(143,110,235,1) 65%, rgba(41,25,217,1) 100%);
+    animation: GradientAnimation 10s ease infinite;
+    background-size: 800% 800%;
+}
+
+.AddFriendPopupButton:active{
+    transform: scale(1);
+}
+
+.Cancelation{
+    background-color: red;
+    padding: 2%;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-size: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.Accept{
+    background-color: #7E59FA;
+}
+
+.FriendName{
+    width: 50%;
+    display: flex;
+    justify-content: baseline;
+    font-size: 20px;
+}
+
+.ButtonsFriends{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    width: 50%;
+    gap: 10px;
+}
+
+.FriendsItemBox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: black;
+    width: 90%;
+    height: 30%;
+    padding: 2%;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-bottom: 2%;
+    border-radius: 30px;
+}
+
+@keyframes GradientAnimation {
+    0% {background-position: 0% 50%}
+    50% {background-position: 100% 50%}
+    100% {background-position: 0% 50%}
+}
+
+.AddfriendButton{
+    border-radius: 20px;
+    padding: 2%;
+    font-size: 20px;
+    border-color: white;
+    border-style: solid;
+    border-width: 2px;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    transition: all 0.3s ease;
+    background: linear-gradient(90deg, rgba(120,0,217,1) 0%, rgba(255,30,220,1) 39%, rgba(143,110,235,1) 65%, rgba(41,25,217,1) 100%);
+    animation: GradientAnimation 10s ease infinite;
+    background-size: 800% 800%;
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+}
+
+.AddfriendButton:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.AddfriendButton:active{
+    transform: scale(1);
+}
+
+.FriendsContentContainer{
+    background-color: #333;
+    width: 90%;
+    height: 50%;
+    overflow: hidden;
+    overflow-y: scroll;
+    padding: 1%;
+    border-radius: 20px;
+}
+
+.FriendsContentContainer::-webkit-scrollbar{
+    display: none;
+}
+
+.ResultItemBox{
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: 90%;
+    height: 50%;
+    border: none;
+    border-radius: 30px;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-bottom: 2%;
+}
+
+.ResultName{
+    width: 50%;
+}
+
+.AddFriendButtonContainer{
+    width: 50%;
+    display: flex;
+    justify-content: end;
+}
+
 .StatsMenu{
     width: 100%;
     height: 100%;
@@ -1158,7 +1356,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /* end */
 
-.ThemesMenu.hidden, .ModeMenu.hidden, .StatsMenu.hidden, .NotesMenu.hidden, .ProfileMenu.hidden{
+.ThemesMenu.hidden, .ModeMenu.hidden, .StatsMenu.hidden, .NotesMenu.hidden, .ProfileMenu.hidden, .FriendsMenu.hidden{
     visibility: hidden;
     transform: translateY(100%);
 }
@@ -1229,7 +1427,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 
-.PopupNote{
+.PopupNote, .AddFriendPopup{
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -1253,7 +1451,7 @@ input[type="number"]::-webkit-outer-spin-button {
     transition: all 0.5s ease;
 }
 
-.PopupNote.hidden{
+.PopupNote.hidden, .AddFriendPopup.hidden{
     visibility: hidden;
     transform: translate(-50%, -200%);
 }
@@ -1286,7 +1484,7 @@ input[type="number"]::-webkit-outer-spin-button {
     color: white;
 }
 
-.notewrapper{
+.notewrapper, .AddFriendWrapper{
     display: flex;
     flex-direction: column;
     gap: 5%;
@@ -1294,6 +1492,20 @@ input[type="number"]::-webkit-outer-spin-button {
     height: 100%;
     justify-content: center;
     align-items: center;
+}
+
+.SearchResult{
+    border-style: solid;
+    border-width: 1px;
+    border-color: white;
+    overflow: hidden;
+    overflow-y: scroll;
+    gap: 1%;
+    align-items: center;
+}
+
+.SearchResult::-webkit-scrollbar{
+    display: none;
 }
 
 
