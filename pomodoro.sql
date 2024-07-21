@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2024 at 09:44 AM
+-- Generation Time: Jul 21, 2024 at 07:41 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -24,6 +24,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `friends`
+--
+
+CREATE TABLE `friends` (
+  `user_id` int(11) NOT NULL,
+  `friend_id` int(11) NOT NULL,
+  `status` enum('pending','accepted','declined') DEFAULT 'pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `friends`
+--
+
+INSERT INTO `friends` (`user_id`, `friend_id`, `status`) VALUES
+(3, 1, 'accepted');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `notes`
 --
 
@@ -39,7 +58,7 @@ CREATE TABLE `notes` (
 --
 
 INSERT INTO `notes` (`id`, `user_id`, `title`, `content`) VALUES
-(7, 1, 'Halo', '');
+(8, 1, 'Belajar Matematika Wajib', 'Testing');
 
 -- --------------------------------------------------------
 
@@ -59,7 +78,12 @@ CREATE TABLE `pomodoro_sessions` (
 --
 
 INSERT INTO `pomodoro_sessions` (`id`, `user_id`, `session_duration`, `date`) VALUES
-(1, 1, 51, '2024-07-14');
+(1, 1, 570, '2024-07-14'),
+(131, 1, 268, '2024-07-15'),
+(244, 1, 0, '2024-07-19'),
+(248, 1, 27, '2024-07-20'),
+(312, 1, 0, '2024-07-21'),
+(528, 3, 0, '2024-07-21');
 
 -- --------------------------------------------------------
 
@@ -80,11 +104,18 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`) VALUES
 (1, 'joshua', 'noturavgaustin@gmail.com', '$2y$10$vVOn4w.TeL4N14ij0HTNne.iPQl0i3LVuLCv9K9pOsR.x73NpcCqG'),
-(2, 'oztin', 'joshuaaustin789@gmail.com', '$2y$10$Semq0fm2La4pbtvfR3oRrOpxfJqpevyVkt.FL3H0X9GPBWAciPE22');
+(3, 'austin', 'testugasjoshua@gmail.com', '$2y$10$l39RupG7ieMNVtEPOqKHEOwZKj21x6AstXoySsjRYGoGGPZs7As7a');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `friends`
+--
+ALTER TABLE `friends`
+  ADD PRIMARY KEY (`user_id`,`friend_id`),
+  ADD KEY `friend_id` (`friend_id`);
 
 --
 -- Indexes for table `notes`
@@ -113,19 +144,30 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `notes`
 --
 ALTER TABLE `notes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `pomodoro_sessions`
 --
 ALTER TABLE `pomodoro_sessions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=713;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `friends`
+--
+ALTER TABLE `friends`
+  ADD CONSTRAINT `friends_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `friends_ibfk_2` FOREIGN KEY (`friend_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
