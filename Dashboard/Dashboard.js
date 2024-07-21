@@ -1,4 +1,48 @@
 document.addEventListener('DOMContentLoaded', function() {
+    function savePreferences() {
+        const focusTime = document.getElementById('focus-time').value;
+        const shortBreak = document.getElementById('short-break').value;
+        const longBreak = document.getElementById('long-break').value;
+        const autoSequence = document.getElementById('AutoSeqCheck').checked;
+        const timerMode = document.querySelector('.mode-dropdown').value;
+
+        const formData = new FormData();
+        formData.append('focusTime', focusTime);
+        formData.append('shortBreak', shortBreak);
+        formData.append('longBreak', longBreak);
+        formData.append('autoSequence', autoSequence);
+        formData.append('timerMode', timerMode);
+
+        fetch('save_preferences.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                console.log('Preferences saved successfully');
+            } else {
+                console.error('Error saving preferences:', data.message);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    // Add event listeners to save preferences when changed
+    const focusTimeInput = document.getElementById('focus-time');
+    const shortBreakInput = document.getElementById('short-break');
+    const longBreakInput = document.getElementById('long-break');
+    const autoSequenceCheck = document.getElementById('AutoSeqCheck');
+    const timerModeDropdown = document.querySelector('.mode-dropdown');
+
+    if (focusTimeInput) focusTimeInput.addEventListener('change', savePreferences);
+    if (shortBreakInput) shortBreakInput.addEventListener('change', savePreferences);
+    if (longBreakInput) longBreakInput.addEventListener('change', savePreferences);
+    if (autoSequenceCheck) autoSequenceCheck.addEventListener('change', savePreferences);
+    if (timerModeDropdown) timerModeDropdown.addEventListener('change', savePreferences);
+
+});
+document.addEventListener('DOMContentLoaded', function() {
     const pipButton = document.getElementById('popupbtn');
     const timerContainer = document.querySelector('.container');
     let pipWindow = null;

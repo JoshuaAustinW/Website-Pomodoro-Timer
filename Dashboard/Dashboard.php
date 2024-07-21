@@ -13,6 +13,12 @@
             exit();
         }
     }
+
+    $focusTime = $_SESSION['focusTime'] ?? $_COOKIE['focusTime'] ?? '25';
+    $shortBreak = $_SESSION['shortBreak'] ?? $_COOKIE['shortBreak'] ?? '5';
+    $longBreak = $_SESSION['longBreak'] ?? $_COOKIE['longBreak'] ?? '15';
+    $autoSequence = $_SESSION['autoSequence'] ?? $_COOKIE['autoSequence'] ?? 'false';
+    $timerMode = $_SESSION['timerMode'] ?? $_COOKIE['timerMode'] ?? 'pomodoro';
     
     $_SESSION['BackgroundURL'] = $_COOKIE['BackgroundURL'] ?? '../res/Background/BackgroundLogin.png';
 ?>
@@ -103,9 +109,9 @@
 
     <button id="popupbtn" class="MenuButton PiP" title="Toggle PIP Mode" class="popupbtn"><img class="ImagePip" src="../res/Icons/Pip.png"></button>
 
-    <div class="MenuButton" id="MenuButton" onclick="OpenMenu()"><i class="fa-solid fa-gear"></i></div>
+    <div class="MenuButton" id="MenuButton" title="Settings" onclick="OpenMenu()"><i class="fa-solid fa-gear"></i></div>
 
-    <div class="AddNoteButton" id="AddNoteButton" onclick="OpenNotePopup()"><i class="fa-solid fa-note-sticky"></i> Add Notes</div>
+    <div class="AddNoteButton" id="AddNoteButton" title="Add Note" onclick="OpenNotePopup()"><i class="fa-solid fa-note-sticky"></i> Add Notes</div>
 
     <div class="BackgroundBlur" id="BackgroundBlur" onclick="CloseMenu()">
         <div class="CloseMenuButton" onclick="CloseMenu()"><i class="fa-solid fa-arrow-right"></i></div>
@@ -188,8 +194,8 @@
                     <div class="mode-section">
                         <h3 class="mode-header">Select Timer Mode</h3>
                         <select class="mode-dropdown">
-                            <option value="pomodoro">Pomodoro</option>
-                            <option value="stopwatch">Stopwatch</option>
+                        <option value="pomodoro" <?php echo $timerMode === 'pomodoro' ? 'selected' : ''; ?>>Pomodoro</option>
+                        <option value="stopwatch" <?php echo $timerMode === 'stopwatch' ? 'selected' : ''; ?>>Stopwatch</option>
                         </select>
                     </div>
 
@@ -199,21 +205,21 @@
                             <div class="timer-column">
                                 <label for="focus-time">Focus Time</label>
                                 <div class="timer-input-container">
-                                    <input type="number" id="focus-time" class="timer-input" min="1" max="120" value="25">
+                                    <input type="number" id="focus-time" class="timer-input" min="1" max="120" value="<?php echo $focusTime; ?>">
                                     <span class="timer-unit">mins</span>
                                 </div>
                             </div>
                             <div class="timer-column">
                                 <label for="short-break">Short Break</label>
                                 <div class="timer-input-container">
-                                    <input type="number" id="short-break" class="timer-input" min="1" max="30" value="5" onblur="checkShortLongBreak()">
+                                    <input type="number" id="short-break" class="timer-input" min="1" max="30" value="<?php echo $shortBreak; ?>" onblur="checkShortLongBreak()">
                                     <span class="timer-unit">mins</span>
                                 </div>
                             </div>
                             <div class="timer-column">
                                 <label for="long-break">Long Break</label>
                                 <div class="timer-input-container">
-                                    <input type="number" id="long-break" class="timer-input" min="1" max="60" value="15" onblur="checkShortLongBreak()">
+                                    <input type="number" id="long-break" class="timer-input" min="1" max="60" value="<?php echo $longBreak; ?>" onblur="checkShortLongBreak()">
                                     <span class="timer-unit">mins</span>
                                 </div>
                             </div>
@@ -223,7 +229,7 @@
                     <div class="mode-section">
                         <div class="auto-sequence">
                             <label class="switch">
-                                <input type="checkbox" id="AutoSeqCheck">
+                            <input type="checkbox" id="AutoSeqCheck" <?php echo $autoSequence === 'true' ? 'checked' : ''; ?>>
                                 <span class="slider round"></span>
                             </label>
                             <div class="auto-sequence-text">
@@ -238,7 +244,10 @@
             </div>
 
             <div class="StatsMenu hidden" id="StatsMenu">
-                <div class="date-range-selector" id="date-range-selector">
+                
+                <div class="StatsContainer">
+                    Your Stats
+                    <div class="date-range-selector" id="date-range-selector">
                     <input type="radio" id="all" name="dateRange" value="all" checked>
                     <label for="all">All Time</label>
 
@@ -251,8 +260,6 @@
                     <input type="radio" id="monthly" name="dateRange" value="monthly">
                     <label for="monthly">Monthly</label>
                 </div>
-                <div class="StatsContainer">
-                    Your Stats
                     <div class="chartContainer">
                         <canvas id="statsChart" class="statsChart"></canvas>
                     </div>
@@ -404,22 +411,16 @@
                 <button id="long-button">long break</button>
             </div>
 
-            <!-- <div class="timer-area">
-                <p id="work-timer"><span></span>25:00<span></span></p>
-                <p id="short-timer" style="display:none;"><span></span>05:00<span></span></p>
-                <p id="long-timer" style="display:none;"><span></span>15:00<span></span></p>
-            </div> -->
             <div class="timer-area">
-    <div id="pomodoro-timer">
-        <p id="work-timer"><span></span>25:00<span></span></p>
-        <p id="short-timer" style="display:none;"><span></span>05:00<span></span></p>
-        <p id="long-timer" style="display:none;"><span></span>15:00<span></span></p>
-    </div>
-    <div id="stopwatch-timer" style="display:none;">
-        <p id="stopwatch-display"><span></span>00:00:00<span></span></p>
-    </div>
-</div>
-
+                <div id="pomodoro-timer">
+                    <p id="work-timer"><span></span>25:00<span></span></p>
+                    <p id="short-timer" style="display:none;"><span></span>05:00<span></span></p>
+                    <p id="long-timer" style="display:none;"><span></span>15:00<span></span></p>
+                </div>
+                <div id="stopwatch-timer" style="display:none;">
+                    <p id="stopwatch-display"><span></span>00:00:00<span></span></p>
+                </div>
+            </div>
 
             <div class="timer-settings">
                 <button id="start-button">Start</button>
