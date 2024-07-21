@@ -13,6 +13,12 @@
             exit();
         }
     }
+
+    $focusTime = $_SESSION['focusTime'] ?? $_COOKIE['focusTime'] ?? '25';
+    $shortBreak = $_SESSION['shortBreak'] ?? $_COOKIE['shortBreak'] ?? '5';
+    $longBreak = $_SESSION['longBreak'] ?? $_COOKIE['longBreak'] ?? '15';
+    $autoSequence = $_SESSION['autoSequence'] ?? $_COOKIE['autoSequence'] ?? 'false';
+    $timerMode = $_SESSION['timerMode'] ?? $_COOKIE['timerMode'] ?? 'pomodoro';
     
     $_SESSION['BackgroundURL'] = $_COOKIE['BackgroundURL'] ?? '../res/Background/BackgroundLogin.png';
 ?>
@@ -184,8 +190,8 @@
                     <div class="mode-section">
                         <h3 class="mode-header">Select Timer Mode</h3>
                         <select class="mode-dropdown">
-                            <option value="pomodoro">Pomodoro</option>
-                            <option value="stopwatch">Stopwatch</option>
+                        <option value="pomodoro" <?php echo $timerMode === 'pomodoro' ? 'selected' : ''; ?>>Pomodoro</option>
+                        <option value="stopwatch" <?php echo $timerMode === 'stopwatch' ? 'selected' : ''; ?>>Stopwatch</option>
                         </select>
                     </div>
 
@@ -195,21 +201,21 @@
                             <div class="timer-column">
                                 <label for="focus-time">Focus Time</label>
                                 <div class="timer-input-container">
-                                    <input type="number" id="focus-time" class="timer-input" min="1" max="120" value="25">
+                                    <input type="number" id="focus-time" class="timer-input" min="1" max="120" value="<?php echo $focusTime; ?>">
                                     <span class="timer-unit">mins</span>
                                 </div>
                             </div>
                             <div class="timer-column">
                                 <label for="short-break">Short Break</label>
                                 <div class="timer-input-container">
-                                    <input type="number" id="short-break" class="timer-input" min="1" max="30" value="5" onblur="checkShortLongBreak()">
+                                    <input type="number" id="short-break" class="timer-input" min="1" max="30" value="<?php echo $shortBreak; ?>" onblur="checkShortLongBreak()">
                                     <span class="timer-unit">mins</span>
                                 </div>
                             </div>
                             <div class="timer-column">
                                 <label for="long-break">Long Break</label>
                                 <div class="timer-input-container">
-                                    <input type="number" id="long-break" class="timer-input" min="1" max="60" value="15" onblur="checkShortLongBreak()">
+                                    <input type="number" id="long-break" class="timer-input" min="1" max="60" value="<?php echo $longBreak; ?>" onblur="checkShortLongBreak()">
                                     <span class="timer-unit">mins</span>
                                 </div>
                             </div>
@@ -219,7 +225,7 @@
                     <div class="mode-section">
                         <div class="auto-sequence">
                             <label class="switch">
-                                <input type="checkbox" id="AutoSeqCheck">
+                            <input type="checkbox" id="AutoSeqCheck" <?php echo $autoSequence === 'true' ? 'checked' : ''; ?>>
                                 <span class="slider round"></span>
                             </label>
                             <div class="auto-sequence-text">
