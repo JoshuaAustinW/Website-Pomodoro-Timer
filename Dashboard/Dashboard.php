@@ -368,22 +368,16 @@
                 <button id="long-button">long break</button>
             </div>
 
-            <!-- <div class="timer-area">
-                <p id="work-timer"><span></span>25:00<span></span></p>
-                <p id="short-timer" style="display:none;"><span></span>05:00<span></span></p>
-                <p id="long-timer" style="display:none;"><span></span>15:00<span></span></p>
-            </div> -->
             <div class="timer-area">
-    <div id="pomodoro-timer">
-        <p id="work-timer"><span></span>25:00<span></span></p>
-        <p id="short-timer" style="display:none;"><span></span>05:00<span></span></p>
-        <p id="long-timer" style="display:none;"><span></span>15:00<span></span></p>
-    </div>
-    <div id="stopwatch-timer" style="display:none;">
-        <p id="stopwatch-display"><span></span>00:00:00<span></span></p>
-    </div>
-</div>
-
+                <div id="pomodoro-timer">
+                    <p id="work-timer"><span></span>25:00<span></span></p>
+                    <p id="short-timer" style="display:none;"><span></span>05:00<span></span></p>
+                    <p id="long-timer" style="display:none;"><span></span>15:00<span></span></p>
+                </div>
+                <div id="stopwatch-timer" style="display:none;">
+                    <p id="stopwatch-display"><span></span>00:00:00<span></span></p>
+                </div>
+            </div>
 
             <div class="timer-settings">
                 <button id="start-button">Start</button>
