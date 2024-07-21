@@ -109,9 +109,9 @@
 
     <button id="popupbtn" class="MenuButton PiP" title="Toggle PIP Mode" class="popupbtn"><img class="ImagePip" src="../res/Icons/Pip.png"></button>
 
-    <div class="MenuButton" id="MenuButton" onclick="OpenMenu()"><i class="fa-solid fa-gear"></i></div>
+    <div class="MenuButton" id="MenuButton" title="Settings" onclick="OpenMenu()"><i class="fa-solid fa-gear"></i></div>
 
-    <div class="AddNoteButton" id="AddNoteButton" onclick="OpenNotePopup()"><i class="fa-solid fa-note-sticky"></i> Add Notes</div>
+    <div class="AddNoteButton" id="AddNoteButton" title="Add Note" onclick="OpenNotePopup()"><i class="fa-solid fa-note-sticky"></i> Add Notes</div>
 
     <div class="BackgroundBlur" id="BackgroundBlur" onclick="CloseMenu()">
         <div class="CloseMenuButton" onclick="CloseMenu()"><i class="fa-solid fa-arrow-right"></i></div>
@@ -240,7 +240,10 @@
             </div>
 
             <div class="StatsMenu hidden" id="StatsMenu">
-                <div class="date-range-selector" id="date-range-selector">
+                
+                <div class="StatsContainer">
+                    Your Stats
+                    <div class="date-range-selector" id="date-range-selector">
                     <input type="radio" id="all" name="dateRange" value="all" checked>
                     <label for="all">All Time</label>
 
@@ -253,8 +256,6 @@
                     <input type="radio" id="monthly" name="dateRange" value="monthly">
                     <label for="monthly">Monthly</label>
                 </div>
-                <div class="StatsContainer">
-                    Your Stats
                     <div class="chartContainer">
                         <canvas id="statsChart" class="statsChart"></canvas>
                     </div>
